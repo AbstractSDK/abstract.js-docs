@@ -183,3 +183,28 @@ export function App() {
   )
 }
 ```
+
+### 4. Use Abstract SDK
+Now that everything is set up, every component inside the Abstract and TanStack Query Providers can use Abstract React Hooks.
+
+```tsx twoslash
+import { accountIdToString } from '@abstract-money/core'
+import { useAccounts } from '@abstract-money/react' // [!code focus]
+
+const owner = `...`
+
+export default function Page() {
+  const accountsQuery = useAccounts({ // [!code focus]
+    args: { // [!code focus]
+      chainName: 'osmosis', // [!code focus]
+      owner, // [!code focus]
+    } // [!code focus]
+  }) // [!code focus]
+
+  if (accountsQuery.isLoading) return <>Loading</>
+  if (accountsQuery.isError) return <>Error =(</>
+  return accountsQuery.data.map(
+    (account, i) => <p key={i}>{accountIdToString(account)}</p>
+  )
+}
+```
