@@ -1,0 +1,185 @@
+# Get started [Get started with abstract.js with just a few lines of code.]
+
+## Overview
+abstract.js is a TypeScript interface for Abstract apps that provides low-level stateless primitives for interacting with Abstract.
+abstract.js is focused on developer experience, bundle size, and performance:
+- **Developer experience** Automatic type safety and inference, comprehensive documentation, composable APIs.
+- **Bundle size** Tree-shakable lightweight modules.
+- **Performance Optimized** encoding/parsing, async tasks only when necessary.
+You can learn more about the rationale behind the project in the [Why abstract.js](/introduction) section.
+
+## Installation
+
+Using [CosmosKit](https://cosmoskit.com):
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [yarn]
+yarn add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [bun]
+bun add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+:::
+Using [graz](https://graz.sh):
+
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/react @abstract-money/provider-graz
+```
+
+```bash [yarn]
+yarn add @abstract-money/react @abstract-money/provider-graz
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/react @abstract-money/provider-graz
+```
+
+```bash [bun]
+bun add @abstract-money/react @abstract-money/provider-graz
+```
+
+:::
+
+## Quick Start
+
+### 1. Set up your Config & Client Provider
+Firstly, set up your config with a desired provider.
+```ts twoslash
+import { createConfig } from '@abstract-money/react' // [!code focus]
+import { grazProvider } from '@abstract-money/provider-graz' // [!code focus]
+
+const config = createConfig({ // [!code focus]
+  provider: grazProvider // [!code focus]
+}) // [!code focus]
+```
+
+### 2. Provide the Config to Abstract Provider
+Wrap your app in the `AbstractProvider` React Context Provider and pass the `config` you created earlier to the `config` property.
+```tsx twoslash
+import { createConfig, AbstractProvider } from '@abstract-money/react' // [!code focus]
+import { grazProvider } from '@abstract-money/provider-graz'
+
+const config = createConfig({
+  provider: grazProvider
+})
+
+export function App() { // [!code focus]
+  return (
+    <AbstractProvider config={config}> // [!code focus]
+      {/*...*/}
+    </AbstractProvider> // [!code focus]
+  ) // [!code focus]
+} // [!code focus]
+```
+
+### 3. Setup Tanstack Query
+:::info
+If you are using `graz`, you can skip this step as [graz](https://graz.sh) already provides a `QueryClient` instance which `AbstractProvider` uses.
+
+You only need to wrap `AbstractProvider` with graz.
+```tsx twoslash
+import { GrazProvider } from 'graz' // [!code focus]
+import { mainnetChains } from 'graz/chains' // [!code focus]
+import { createConfig, AbstractProvider } from '@abstract-money/react'
+import { grazProvider } from '@abstract-money/provider-graz'
+
+const config = createConfig({
+  provider: grazProvider
+})
+
+export function App() {
+  return (
+    <GrazProvider grazOptions={{ // [!code focus]
+      chains: [mainnetChains.osmosis], // [!code focus]
+      chainsConfig: { // [!code focus]
+        [mainnetChains.osmosis.chainId]: { // [!code focus]
+          gas: { // [!code focus]
+            price: '0.25', // [!code focus]
+            denom: 'osmo', // [!code focus]
+          }, // [!code focus]
+        }, // [!code focus]
+      }, // [!code focus]
+    }}> // [!code focus]
+      <AbstractProvider config={config}>
+        {/*...*/}
+      </AbstractProvider>
+    </GrazProvider> // [!code focus]
+  )
+}
+```
+:::
+
+Outside the `AbstractProvider`, wrap your app in a TanStack Query React Context Provider,
+e.g. QueryClientProvider, and pass a new QueryClient instance to the client property.
+
+Check out the [TanStack Query docs](https://tanstack.com/query/v4/docs/framework/react/overview) to learn about the library, APIs, and more.
+
+Install `@tanstack/react-query@^4`.
+:::warning
+Since SDK relies on [ts-codegen](https://github.com/CosmWasm/ts-codegen), it is required to install only the 4th major version of TanStack React Query,
+as other versions are not supported yet.
+:::
+
+:::code-group
+
+```bash [npm]
+npm i @tanstack/react-query@^4
+```
+
+```bash [yarn]
+yarn add @tanstack/react-query@^4
+```
+
+```bash [pnpm]
+pnpm add @tanstack/react-query@^4
+```
+
+```bash [bun]
+bun add @tanstack/react-query@^4
+```
+
+:::
+Now, wrap the `AbstractProvider` with `QueryClientProvider`.
+```tsx twoslash
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // [!code focus]
+import { ChainProvider, defaultModalViews } from "@cosmos-kit/react";
+import { wallets as keplrWallets } from "@cosmos-kit/keplr";
+import { createConfig, AbstractProvider } from '@abstract-money/react'
+import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
+
+const config = createConfig({
+  provider: cosmosKitProvider
+})
+
+const client = new QueryClient() // [!code focus]
+
+export function App() {
+  return (
+    <ChainProvider
+      chains={["cosmoshub"]}
+      wallets={[
+        ...keplrWallets,
+        /*...*/
+      ]}
+    >
+      <QueryClientProvider client={client}> // [!code focus]
+        <AbstractProvider config={config}>
+          {/*...*/}
+        </AbstractProvider>
+      </QueryClientProvider> // [!code focus]
+    </ChainProvider>
+  )
+}
+```
