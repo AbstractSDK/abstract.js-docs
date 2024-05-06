@@ -13,8 +13,22 @@ export default defineConfig({
       link: '/getting-started',
     },
     {
-      text: 'Example',
-      link: '/example',
+      text: 'Core',
+      items: [
+        {
+          text: 'Introduction',
+          link: '/core/introduction',
+        },
+      ]
+    },
+    {
+      text: 'CLI',
+      items: [
+        {
+          text: 'Introduction',
+          link: '/cli/introduction',
+        },
+      ]
     },
   ],
   twoslash: {

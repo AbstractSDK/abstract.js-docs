@@ -1,0 +1,96 @@
+# `@abstract-money/cli` [One command to rule them all!]
+
+The Abstract CLI is a command-line tool for generating JavaScript bindings to contracts that use Abstract.
+
+:::info
+If you have `tsconfig.json` in your project, it will generate TypeScript typings too!
+:::
+
+:::warning
+The CLI package relies hardly on [ts-codegen](https://github.com/CosmWasm/ts-codegen).
+:::
+
+## Installation 
+
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/cli
+```
+
+```bash [yarn]
+yarn add @abstract-money/cli
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/cli
+```
+
+```bash [bun]
+bun add @abstract-money/cli
+```
+
+:::
+
+## Usage
+
+```bash
+abstract <command> [options]
+```
+
+## Init
+
+Once you have installed the CLI, you have to define CLI config at `abstract.config.ts`.
+You can generate a default one, using the command:
+
+```bash
+abstract init
+```
+
+This will generate an `abstract.config.ts` in your project root. You can configure accordingly.
+
+```ts twoslash
+import { defineConfig } from '@abstract-money/cli'
+import { react, registry } from '@abstract-money/cli/plugins'
+
+export default defineConfig({
+  // Target directory for generated files.
+  out: './src/generated',
+  // List of plugins to use.
+  plugins: [
+    // Generate React hooks.
+    react(),
+    // Pull contract schemas from the registry at https://github.com/AbstractSDK/schemas
+    registry({
+      contracts: [
+        {
+          name: 'app-name', // Your App Name.
+          namespace: 'abstract', // To claim a namespace on mainnet, please get in touch with Abstract Team.
+          version: '0.1.0',
+        },
+      ],
+    }),
+  ],
+})
+```
+
+## Generate
+Once done, you're ready to generate the code:
+
+```bash
+abstract generate
+```
+
+You can use additional options as mentioned above.
+You should get an output like:
+
+```sh
+❯ abstract generate
+✔ Validating plugins
+✔ Resolving contracts
+✔ Validating contracts
+✔ Running plugins
+✔ Writing to src/generated/index.ts
+```
+
+And you should be all set to use the types generated directly into your codebase.

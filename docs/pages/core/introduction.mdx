@@ -1,0 +1,41 @@
+# `@abstract-money/core` [VanillaJS library for interacting with Abstract Apps.]
+
+The Abstract Core is a VanillaJS library for interacting with Abstract Apps.
+It allows you to interact with Abstract Apps in Node.JS, or to create your own React library on top of it if you're not willing to use [our React package](/getting-started).
+
+## Installation 
+
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/core
+```
+
+```bash [yarn]
+yarn add @abstract-money/core
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/core
+```
+
+```bash [bun]
+bun add @abstract-money/core
+```
+
+:::
+
+## Usage
+
+```ts twoslash
+import { createApiClient } from '@abstract-money/core'
+
+const client = createApiClient({ apiUrl: 'https://api.abstract.money' })
+
+const accounts = await client.getAccountsByOwnerFromApi({
+  owner: '...',
+  chains: ['osmosis'],
+})
+
+console.log(accounts)
+```
