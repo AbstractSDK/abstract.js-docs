@@ -1,0 +1,51 @@
+# Running Subgraph
+
+This guide describes how to run the Abstract API using Docker and how to configure it with custom network settings.
+
+First, prepare the network configurations you plan to use with the API instance. The configuration should follow this schema:
+
+```json
+{
+  "chainId": {
+    "rpc": "string",
+    "versionControl": "string"
+  }
+}
+```
+
+Here, `chainId` is a placeholder for the actual chain ID, which will include the following properties:
+
+- **rpc**: The URL of the network's RPC endpoint.
+- **versionControl**: The address of the Version Control contract deployed on that network.
+
+For example:
+
+```json
+{
+  "phoenix-1": {
+    "rpc": "https://rpc-proxy.abstract-os.workers.dev/phoenix-1/rpc",
+    "versionControl": "terra1hstp8gfjlg2reet90mgada3h8n9jf2d7tnd9r554h0d0q95lgq5q2fhp8v"
+  }
+}
+```
+
+Once you have the network configuration prepared, pass it as an environment variable to the Docker instance. Use the following command:
+
+```sh
+docker run abstractsdk/subgraph:0.19 -e NETWORK_CONFIGURATION_MAP='<prepared_json>' -p 4001:4001
+```
+
+### Example
+
+To run the API with the example network configuration provided above, the command would be:
+
+```sh
+docker run abstractsdk/subgraph:0.19 -e NETWORK_CONFIGURATION_MAP='{"phoenix-1":{"rpc":"https://rpc-proxy.abstract-os.workers.dev/phoenix-1/rpc","versionControl":"terra1hstp8gfjlg2reet90mgada3h8n9jf2d7tnd9r554h0d0q95lgq5q2fhp8v"}}' -p 4001:4001
+```
+
+In this command:
+- `abstractsdk/subgraph:0.19` specifies the Docker image to use.
+- `-e NETWORK_CONFIGURATION_MAP='...'` passes the network configuration as an environment variable.
+- `-p 4001:4001` maps port 4001 on your local machine to port 4001 in the Docker container.
+
+After running this command, the API will be served and accessible at `http://localhost:4001`.

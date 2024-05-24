@@ -30,6 +30,15 @@ export default defineConfig({
         },
       ]
     },
+    {
+      text: 'Miscellaneous',
+      items: [
+        {
+          text: 'Running subgraph',
+          link: '/miscellaneous/running-subgraph',
+        }
+      ]
+    },
   ],
   twoslash: {
     compilerOptions: {
