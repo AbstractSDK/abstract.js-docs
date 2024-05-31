@@ -1,0 +1,46 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useAnsTokenFromAPI [Hook for getting Token information from ANS.]
+
+## Import
+
+```ts twoslash 
+import { useAnsTokenFromAPI } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAnsTokenFromAPI } from '@abstract-money/react'
+
+function App() {
+  const ansTokenFromAPIQuery = useAnsTokenFromAPI({
+    args: {
+      id: '...',
+      chainName: 'pion'
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+
+Arguments passed to the hook
+
+#### chainName
+
+`string | string[]`
+
+Array of chains to query.
+
+#### id
+
+`string`
+
+ANS Id of the token.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

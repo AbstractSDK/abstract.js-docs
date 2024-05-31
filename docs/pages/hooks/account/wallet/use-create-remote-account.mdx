@@ -1,0 +1,58 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+import MutationParametersSnippet from './mutation-parameters-snippet.mdx'
+
+# useCreateRemoteAccount [Hook for creating an account on a remote chain.]
+
+## Import
+
+```ts twoslash 
+import { useCreateRemoteAccount } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useCreateRemoteAccount } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const createRemoteAccountMutation = useCreateRemoteAccount({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion'
+  })
+
+  return (
+    <button
+      onClick={() =>
+        createRemoteAccountMutation.mutate({
+          args: {
+            hostChainName: 'pion'
+          },
+          fee: 'auto',
+          funds: []
+        })
+      }
+    >
+      createRemoteAccount
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+### args
+Arguments passed to the mutation
+
+#### hostChainName
+`string`
+
+Host chain name to create a remote account on.
+
+<MutationParametersSnippet />

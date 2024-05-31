@@ -1,0 +1,48 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useModuleInstantiate2AddressFromApi [Hook for predicting instantiate2 address of the contract to deploy.]
+
+## Import
+
+```ts twoslash 
+import { useModuleInstantiate2AddressFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useModuleInstantiate2AddressFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const moduleInstantiate2AddressFromApiQuery = useModuleInstantiate2AddressFromApi({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+    args: {
+      moduleId: 'some:id',
+      version: 'latest'
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+Arguments passed to the hook
+
+### moduleId
+`${string}:${string}`
+
+Id of the module to predict address of.
+
+### version
+`ModuleVersion | undefined`
+
+Version of the module to predict address of.
+
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

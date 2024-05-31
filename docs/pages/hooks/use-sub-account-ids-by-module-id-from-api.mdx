@@ -1,0 +1,44 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useSubAccountIdsByModuleIdFromApi [Hook for getting sub account ids by module.]
+
+## Import
+
+```ts twoslash 
+import { useSubAccountIdsByModuleIdFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSubAccountIdsByModuleIdFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const subAccountIdsByModuleIdFromApiQuery = useSubAccountIdsByModuleIdFromApi({
+    args: {
+      moduleId: '...',
+      accountId: stringToAccountId('pion-1')
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+
+Arguments passed to the hook
+
+#### accountId
+`AccountId` that has sub accounts to query against.
+
+#### moduleId
+
+`string`
+
+ID of the ModuleId that sub accounts must have installed.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

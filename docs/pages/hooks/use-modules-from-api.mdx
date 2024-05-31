@@ -1,0 +1,39 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useModulesFromApi [Hook for getting all existing modules on a chain.]
+
+## Import
+
+```ts twoslash 
+import { useModulesFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useModulesFromApi } from '@abstract-money/react'
+
+function App() {
+  const modulesFromApiQuery = useModulesFromApi({
+    args: {
+      chainName: 'pion'
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+
+Arguments passed to the hook
+
+#### chainName
+
+`string | string[]`
+
+Array of chains to query.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

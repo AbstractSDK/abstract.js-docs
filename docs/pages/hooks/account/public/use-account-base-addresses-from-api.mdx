@@ -1,0 +1,30 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useAccountBaseAddressesFromApi [Hook for getting base addresses from API (such as Manager and Proxy addresses).]
+
+## Import
+
+```ts twoslash 
+import { useAccountBaseAddressesFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAccountBaseAddressesFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const accountBaseAddressesFromApiQuery = useAccountBaseAddressesFromApi({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion'
+  })
+}
+```
+
+## Parameters
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

@@ -1,0 +1,47 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useAccounts [Hook for getting accounts owned by an address.]
+
+## Import
+
+```ts twoslash 
+import { useAccounts } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAccounts } from '@abstract-money/react'
+
+function App() {
+  const accountsQuery = useAccounts({
+    args: {
+      owner: '...',
+      chainName: 'pion'
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+
+Arguments passed to the hook
+
+#### owner
+
+`string`
+
+Bech address of the queried owner of the accounts
+
+
+#### chainName
+
+`string | string[]`
+
+Array of chains to query.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

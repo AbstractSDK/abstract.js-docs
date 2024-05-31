@@ -1,0 +1,74 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+import MutationParametersSnippet from './mutation-parameters-snippet.mdx'
+
+# useCreateSubAccount [Hook for creating a sub account.]
+
+## Import
+
+```ts twoslash 
+import { useCreateSubAccount } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useCreateSubAccount } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const createSubAccountMutation = useCreateSubAccount({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion'
+  })
+
+  return (
+    <button
+      onClick={() =>
+        createSubAccountMutation.mutate({
+          args: {
+            name: 'My account',
+            installModules: []
+          },
+          fee: 'auto'
+        })
+      }
+    >
+      createSubAccount
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+### args
+Arguments passed to the mutation
+
+### link (optional)
+`string | undefined`
+
+### name
+`string`
+
+### baseAsset (optional)
+`string | undefined`
+
+### description (optional)
+`string | undefined`
+
+### installModules
+`ModuleInstallConfig[]`
+
+### namespace (optional)
+`string | undefined`
+
+### subAccountId (optional)
+`number | undefined`
+
+<MutationParametersSnippet />

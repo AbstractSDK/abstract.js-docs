@@ -1,0 +1,31 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useModules [Hook for getting modules installed on an account.]
+
+## Import
+
+```ts twoslash 
+import { useModules } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useModules } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const modulesQuery = useModules({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

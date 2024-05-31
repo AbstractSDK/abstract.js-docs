@@ -1,0 +1,31 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useRemoteAccountIds [Hook for getting account ids on remote chains.]
+
+## Import
+
+```ts twoslash 
+import { useRemoteAccountIds } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useRemoteAccountIds } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const remoteAccountIdsQuery = useRemoteAccountIds({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

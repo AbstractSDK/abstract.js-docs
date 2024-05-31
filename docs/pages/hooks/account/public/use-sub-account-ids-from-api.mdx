@@ -1,0 +1,31 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useSubAccountIdsFromApi [Hook for getting sub accounts ids of an account.]
+
+## Import
+
+```ts twoslash 
+import { useSubAccountIdsFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSubAccountIdsFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const subAccountIdsFromApi = useSubAccountIdsFromApi({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

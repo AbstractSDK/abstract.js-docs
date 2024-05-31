@@ -1,0 +1,37 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useAccountBalancesFromApi [Hook for getting account balance from API.]
+
+## Import
+
+```ts twoslash 
+import { useAccountBalancesFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAccountBalancesFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const accountBalanceFromApiQuery = useAccountBalancesFromApi({
+    args: {
+      accountId: stringToAccountId('pion-1')
+    }
+  })
+}
+```
+
+## Parameters
+
+### args
+
+Arguments passed to the hook
+
+#### accountId
+`AccountId` to check balance of.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />
