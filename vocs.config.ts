@@ -72,16 +72,20 @@ export default defineConfig({
           {
             text: 'Public', items: [
               {
-                text: 'useAccountBaseAddressesFromApi',
-                link: '/hooks/account/public/use-account-base-addresses-from-api',
+                text: 'useAccountAddressFromApi',
+                link: '/hooks/account/public/use-account-address-from-api',
+              },
+              {
+                text: 'useAccountInstantiate2Address',
+                link: '/hooks/account/public/use-account-instantiate2-address',
               },
               {
                 text: 'useAccountSettings',
                 link: '/hooks/account/public/use-account-settings',
               },
               {
-                text: 'useModuleInstantiate2AddressFromApi',
-                link: '/hooks/account/public/use-module-instantiate2-address-from-api',
+                text: 'useModuleInstantiate2Address',
+                link: '/hooks/account/public/use-module-instantiate2-address',
               },
               {
                 text: 'useModules',
@@ -90,6 +94,10 @@ export default defineConfig({
               {
                 text: 'useRemoteAccountIds',
                 link: '/hooks/account/public/use-remote-account-ids',
+              },
+              {
+                text: 'useRemoteAccounts',
+                link: '/hooks/account/public/use-remote-accounts',
               },
               {
                 text: 'useSubAccountIdsFromApi',
