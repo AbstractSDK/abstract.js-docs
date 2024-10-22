@@ -56,18 +56,20 @@ function App() {
 
 Arguments passed to the mutation. This includes:
 
-- `assets`: An array of `Asset` objects to deposit. An `Asset` can be either a `NativeAsset` or a `CW20Asset`:
+### assets
+
+An array of `Asset` objects to deposit. An `Asset` can be either a `NativeAsset` or a `CW20Asset`:
 
 For `NativeAsset`:
 
-- `type`: The type of asset, which is always `'native'`
+- `type`: `'native'`
 - `denom`: The denomination of the native token
 - `amount`: The amount to deposit
 
 
 For `CW20Asset`:
 
-- `type`: The type of asset, which is always `'cw20'`
+- `type`: `'cw20'`
 - `address`: The contract address of the CW20 token
 - `amount`: The amount to deposit
 
