@@ -1,0 +1,91 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useDeposit [Hook to deposit assets to an Account.]
+
+## Import
+
+```ts twoslash 
+import { useDeposit } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useDeposit } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const depositMutation = useDeposit({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        depositMutation.mutate({
+          fee: 'auto',
+          memo: 'Deposit to Abstract Account',
+          funds: [{ denom: 'uatom', amount: '1000000' }],
+          args: {
+            assets: [
+              {
+                type: 'native',
+                denom: 'uatom',
+                amount: '1000000',
+              },
+            ],
+          },
+        })
+      }
+    >
+      deposit
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+- `assets`: An array of `Asset` objects to deposit. An `Asset` can be either a `NativeAsset` or a `CW20Asset`:
+
+For `NativeAsset`:
+
+- `type`: The type of asset, which is always `'native'`
+- `denom`: The denomination of the native token
+- `amount`: The amount to deposit
+
+
+For `CW20Asset`:
+
+- `type`: The type of asset, which is always `'cw20'`
+- `address`: The contract address of the CW20 token
+- `amount`: The amount to deposit
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
