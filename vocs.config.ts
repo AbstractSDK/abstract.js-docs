@@ -100,6 +100,10 @@ export default defineConfig({
                 link: '/hooks/account/public/use-remote-accounts',
               },
               {
+                text: 'useSimulateExecuteRemoteAccount',
+                link: '/hooks/account/public/use-simulate-execute-remote-account',
+              },
+              {
                 text: 'useSubAccountIdsFromApi',
                 link: '/hooks/account/public/use-sub-account-ids-from-api',
               },

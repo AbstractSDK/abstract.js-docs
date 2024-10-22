@@ -1,0 +1,74 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useSimulateExecuteRemoteAccount [Hook for simulating a message to be executed on a manager on a remote chain.]
+
+## Import
+
+```ts twoslash 
+import { useSimulateExecuteRemoteAccount } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSimulateExecuteRemoteAccount } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const simulateExecuteRemoteAccount = useSimulateExecuteRemoteAccount({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion'
+  })
+
+  return (
+    <button
+      onClick={() =>
+        simulateExecuteRemoteAccount.mutate({
+          hostChainName: 'osmosis',
+          accountMsg: {
+            execute: {
+              msgs: [
+                {
+                  bank: {
+                    send: {
+                      to_address: 'osmo1...',
+                      amount: [
+                        {
+                          denom: 'uosmo',
+                          amount: '1000000'
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+        })
+      }
+    >
+      simulateExecuteRemoteAccount
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+### args
+Arguments passed to the mutation
+
+#### hostChainName
+`string`
+
+Host chain name to simulate execution on a remote account.
+
+#### accountMsg
+`AccountMsg`
+
+The message to be executed on the remote account.
