@@ -16,7 +16,7 @@ import { useRequestRemoteFunds } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const execute = useRequestRemoteFunds({
+  const requestRemoteFunds = useRequestRemoteFunds({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion',
   })
@@ -38,7 +38,7 @@ function App() {
         })
       }
     >
-      execute
+      request remote funds
     </button>
   )
 }
