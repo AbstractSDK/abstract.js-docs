@@ -128,8 +128,8 @@ export default defineConfig({
                 link: '/hooks/account/wallet/use-enable-ibc',
               },
               {
-                text: 'useDeposit',
-                link: '/hooks/account/wallet/use-deposit',
+                text: 'useExecuteOnRemoteModule',
+                link: '/hooks/account/wallet/use-execute-on-remote-module',
               },
               {
                 text: 'useExecuteOnRemote',

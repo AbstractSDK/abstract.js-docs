@@ -1,0 +1,108 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useExecuteOnRemoteModule [Hook to enable IBC on the account.]
+
+## Import
+
+```ts twoslash 
+import { useExecuteOnRemoteModule } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useExecuteOnRemoteModule } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const enableIbc = useExecuteOnRemoteModule({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        executeOnRemoteModule.mutate({
+          fee: 'auto',
+          memo: 'Execute on remote module',
+          funds: [
+            {
+              denom: 'uatom',
+              amount: '1000000',
+            },
+          ],
+          args: {
+            hostChainName: 'cosmoshub-4',
+            moduleId: 'some-module-id',
+            moduleMsg: 'msg_to_be_executed',
+          },
+        })
+
+      }
+    >
+      enable IBC
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+### hostChainName
+
+`string`
+
+The name of the host chain where the remote module is located.
+
+### moduleId
+
+`string`
+
+The unique identifier of the module to be executed.
+
+### moduleType (optional)
+
+`ModuleType | undefined`
+
+The type of the module. Can be one of the following:
+- 'account'
+- 'native'
+- 'adapter'
+- 'app'
+- 'standalone'
+- 'service'
+
+### moduleMsg
+
+`Record<string, unknown> | string`
+
+The message to be executed on the remote module. This can be either a JSON object (`Record<string, unknown>`) or a string representing the message.

@@ -52,6 +52,25 @@ function App() {
 
 ## Mutation Parameters
 
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
+
 ### args
 
 Arguments passed to the mutation. This includes:
@@ -72,22 +91,3 @@ For `CW20Asset`:
 - `type`: `'cw20'`
 - `address`: The contract address of the CW20 token
 - `amount`: The amount to deposit
-
-### fee
-
-`number | StdFee | "auto"`
-
-The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
-
-### memo (optional)
-
-`string | undefined`
-
-An optional memo to attach to the transaction.
-
-### funds
-
-An array of coin objects representing the funds to be sent with the transaction. Each object contains:
-
-- `denom`: The denomination of the coin
-- `amount`: The amount of the coin
