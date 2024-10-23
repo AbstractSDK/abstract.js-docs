@@ -1,0 +1,106 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useExecuteOnRemote [Hook to execute AccountTypes.ExecuteMsg on a remote account.]
+
+## Import
+
+```ts twoslash 
+import { useExecuteOnRemote } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useExecuteOnRemote } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const executeOnRemote = useExecuteOnRemote({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        executeOnRemote.mutate({
+          fee: 'auto',
+          funds: [
+            {
+              denom: 'uatom',
+              amount: '1000000',
+            },
+          ],
+          args: {
+            hostChainName: '',
+            accountMsg: {
+              execute: {
+                msgs: [
+                  {
+                    bank: {
+                      send: {
+                        amount: [
+                          {
+                            amount: '1000000',
+                            denom: 'uatom',
+                          },
+                        ],
+                        to_address: 'cosmos1...',
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        })
+      }
+    >
+      execute on remote
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+### hostChainName
+
+`string`
+
+The name of the host chain where the remote module is located.
+
+
+#### accountMsg
+
+`AccountMsg`
+
+The CosmosMsg to be executed on the remote account. 

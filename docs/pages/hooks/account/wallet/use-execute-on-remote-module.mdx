@@ -1,7 +1,7 @@
 import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
 import ParameterCommonSnippet from './parameter-common-snippet.mdx'
 
-# useExecuteOnRemoteModule [Hook to enable IBC on the account.]
+# useExecuteOnRemoteModule [Hook to execute messages on remote modules]
 
 ## Import
 
@@ -16,7 +16,7 @@ import { useExecuteOnRemoteModule } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const enableIbc = useExecuteOnRemoteModule({
+  const executeOnRemoteModule = useExecuteOnRemoteModule({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion',
   })
@@ -26,7 +26,6 @@ function App() {
       onClick={() =>
         executeOnRemoteModule.mutate({
           fee: 'auto',
-          memo: 'Execute on remote module',
           funds: [
             {
               denom: 'uatom',
@@ -42,7 +41,7 @@ function App() {
 
       }
     >
-      enable IBC
+      execute on remote module
     </button>
   )
 }

@@ -26,7 +26,6 @@ function App() {
       onClick={() =>
         depositMutation.mutate({
           fee: 'auto',
-          memo: 'Deposit to Abstract Account',
           funds: [{ denom: 'uatom', amount: '1000000' }],
           args: {
             assets: [
