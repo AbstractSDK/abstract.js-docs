@@ -1,0 +1,75 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useUpdateInfo [Hook to update the info of an account.]
+
+## Import
+
+```ts twoslash 
+import { useUpdateInfo } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useUpdateInfo } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const updateInfo = useUpdateInfo({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        updateInfo.mutate({
+          fee: 'auto',
+          args: {
+            name: 'My Account',
+            description: 'This is my personal account',
+            link: 'https://example.com/my-account',
+          },
+        })
+      }
+    >
+      update info
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+#### name (optional)
+
+`string | undefined`
+
+The new name for the account.
+
+#### description (optional)
+
+`string | undefined`
+
+The new description for the account.
+
+#### link (optional)
+
+`string | undefined`
+
+The new link associated with the account.

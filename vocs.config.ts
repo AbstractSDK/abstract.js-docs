@@ -148,6 +148,10 @@ export default defineConfig({
                 link: '/hooks/account/wallet/use-send-funds-to-remote',
               },
               {
+                text: 'useUpdateInfo',
+                link: '/hooks/account/wallet/use-update-info',
+              },
+              {
                 text: 'useUpdateSettings',
                 link: '/hooks/account/wallet/use-update-settings',
               },
