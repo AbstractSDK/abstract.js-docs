@@ -34,8 +34,13 @@ function App() {
           ],
           args: {
             hostChainName: 'cosmoshub-4',
-            moduleId: 'some-module-id',
-            moduleMsg: 'msg_to_be_executed',
+            moduleId: 'counter',
+            moduleMsg: {
+              count: {
+                type: 'add',
+                value: '1',
+              },
+            },
           },
         })
 
