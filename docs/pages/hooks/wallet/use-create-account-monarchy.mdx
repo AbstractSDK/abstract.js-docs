@@ -1,0 +1,85 @@
+import ParameterMutationSnippet from '../parameter-mutation-snippet.mdx'
+import ParameterExtraSnippet from '../parameter-extra-snippet.mdx'
+
+# useCreateAccountMonarchy [Hook to create an account monarchy]
+
+## Import
+
+```ts twoslash 
+import { useCreateAccountMonarchy } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useCreateAccountMonarchy } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const createAccountMonarchy = useCreateAccountMonarchy({
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        createAccountMonarchy.mutate({
+          fee: 'auto',
+          args: {
+            accountId: stringToAccountId('pion-1'),
+            owner: 'pion1...',
+          },
+        })
+      }
+    >
+      createAccountMonarchy
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+
+### chainName
+
+`string | undefined`
+
+Name of the chain to be used to fetch the query.
+
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds (optional)
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
+
+### args
+Arguments passed to the mutation
+
+#### accountId
+`AccountId | undefined`
+
+The account id to create the monarchy for.
+
+#### owner
+`string`
+
+The owner of the account.
+
+<ParameterExtraSnippet />

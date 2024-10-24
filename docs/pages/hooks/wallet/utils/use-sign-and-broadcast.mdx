@@ -23,7 +23,6 @@ function App() {
       onClick={() =>
         signAndBroadcast.mutate({
           fee: 'auto',
-          memo: 'test',
           args: {
             messages: [
               {
@@ -56,6 +55,7 @@ Name of the chain to be used to fetch the query.
 <ParameterMutationSnippet />
 
 ## Mutation Parameters
+
 ### args
 Arguments passed to the mutation
 
