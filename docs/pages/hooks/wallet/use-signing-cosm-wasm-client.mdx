@@ -1,0 +1,27 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterCommonSnippet from '../parameter-query-common-snippet.mdx'
+
+# useSigningCosmWasmClient [Hook for fetching the signing cosmwasm client]
+
+## Import
+
+```ts twoslash 
+import { useSigningCosmWasmClient } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSigningCosmWasmClient } from '@abstract-money/react'
+
+function App() {
+  const signingCosmWasmClient = useSigningCosmWasmClient({
+    chainName: 'osmosis',
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+<ParameterQuerySnippet />

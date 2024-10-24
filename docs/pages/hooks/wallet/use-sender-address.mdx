@@ -1,0 +1,27 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterCommonSnippet from '../parameter-query-common-snippet.mdx'
+
+# useSenderAddress [Hook for fetching the sender address]
+
+## Import
+
+```ts twoslash 
+import { useSenderAddress } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSenderAddress } from '@abstract-money/react'
+
+function App() {
+  const senderAddress = useSenderAddress({
+    chainName: 'osmosis',
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+<ParameterQuerySnippet />
