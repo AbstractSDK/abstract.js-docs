@@ -23,15 +23,6 @@ export default defineConfig({
             link: '/hooks/public/use-abstract-module-version',
           },
           {
-
-            text: 'useAccountFactoryConfigFromApi',
-            link: '/hooks/public/use-account-factory-config-from-api',
-          },
-          {
-            text: 'useAccountFactoryQueryClientFromApi',
-            link: '/hooks/public/use-account-factory-query-client-from-api',
-          },
-          {
             text: 'useAccountsBaseAddressesFromApi',
             link: '/hooks/public/use-accounts-base-addresses-from-api',
           },
@@ -42,6 +33,10 @@ export default defineConfig({
           {
             text: 'useRemoteHosts',
             link: '/hooks/public/use-remote-hosts',
+          },
+          {
+            text: 'useSimulateRemoteMsg',
+            link: '/hooks/public/use-simulate-remote-msg',
           },
         ]
       },
