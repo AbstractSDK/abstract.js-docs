@@ -38,6 +38,10 @@ export default defineConfig({
             text: 'useSimulateRemoteMsg',
             link: '/hooks/public/use-simulate-remote-msg',
           },
+          {
+            text: 'useSmartQuery',
+            link: '/hooks/public/use-smart-query',
+          },
         ]
       },
       {
