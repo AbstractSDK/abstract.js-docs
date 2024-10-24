@@ -18,7 +18,7 @@ function App() {
   const accountsQuery = useAccounts({
     args: {
       owner: '...',
-      chainName: 'pion'
+      chains: ['osmosis'],
     }
   })
 }
@@ -37,9 +37,9 @@ Arguments passed to the hook
 Bech address of the queried owner of the accounts
 
 
-#### chainName
+#### chains
 
-`string | string[]`
+`string[]`
 
 Array of chains to query.
 
