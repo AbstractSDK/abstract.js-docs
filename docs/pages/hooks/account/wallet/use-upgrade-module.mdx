@@ -1,0 +1,79 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useUpgradeModules [Hook to upgrade modules in an Abstract account]
+
+## Import
+
+```ts twoslash 
+import { useUpgradeModules } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useUpgradeModules } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const updateInfo = useUpgradeModules({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        upgradeModules.mutate({
+          fee: 'auto',
+          args: {
+            modules: [
+              [
+                {
+                  name: 'abstract',
+                  namespace: 'abstract',
+                  version: 'latest',
+                },
+              ],
+            ],
+          },
+        })
+      }
+    >
+      upgrade modules
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+#### modules
+
+`ModuleInfo$1[][]`
+
+An array of arrays containing ModuleInfo$1 objects. Each ModuleInfo$1 object represents a module to be upgraded and includes:
+
+- `name`: `string` - The name of the module.
+- `namespace`: `string` - The namespace of the module.
+- `version`: `"latest" | { version: string }` - The version of the module, either "latest" or a specific version string.
+
+#### subAccountId (optional)
+
+`number | undefined`
+
+The ID of the sub-account to upgrade modules for. If not provided, the upgrade will be performed on the main account.
