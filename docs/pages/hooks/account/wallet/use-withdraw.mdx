@@ -1,0 +1,98 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useWithdraw [Hook to withdraw assets from an Account.]
+
+## Import
+
+```ts twoslash 
+import { useWithdraw } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useWithdraw } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const withdraw = useWithdraw({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        withdraw.mutate({
+          fee: 'auto',
+          args: {
+            assets: [
+              {
+                denom: 'uosmo',
+                amount: '1000',
+                type: 'native',
+              },
+            ],
+            recipient: 'recipient_address',
+          },
+        })
+      }
+    >
+      withdraw
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### funds
+
+An array of coin objects representing the funds to be sent with the transaction. Each object contains:
+
+- `denom`: The denomination of the coin
+- `amount`: The amount of the coin
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+### assets
+
+An array of `Asset` objects to withdraw. An `Asset` can be either a `NativeAsset` or a `CW20Asset`:
+
+For `NativeAsset`:
+
+- `type`: `'native'`
+- `denom`: The denomination of the native token
+- `amount`: The amount to withdraw
+
+
+For `CW20Asset`:
+
+- `type`: `'cw20'`
+- `address`: The contract address of the CW20 token
+- `amount`: The amount to withdraw
+
+### recipient
+
+`string`
+
+The address to send the withdrawn assets to.
