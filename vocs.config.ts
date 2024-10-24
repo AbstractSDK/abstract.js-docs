@@ -46,7 +46,15 @@ export default defineConfig({
       },
       {
         text: 'Wallet',
-        items: [
+        items: [{
+          text: 'Utils',
+            items: [
+              {
+                text: 'useSignAndBroadcast',
+                link: '/hooks/wallet/utils/use-sign-and-broadcast',
+              },
+            ]
+          },
           {
             text: 'useCreateAccountMonarchy',
             link: '/hooks/wallet/use-create-account-monarchy',
