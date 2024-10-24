@@ -1,7 +1,7 @@
 import ParameterQuerySnippet from './parameter-query-snippet.mdx'
 import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
 
-# useCosmWasmClient [Hook for fetching base addresses of multiple Abstract accounts]
+# useCosmWasmClient [Hook for fetching a CosmWasmClient instance]
 
 ## Import
 
@@ -16,7 +16,7 @@ import { useCosmWasmClient } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
- const cosmWasmClient = useCosmWasmClient({ chainName: 'mainnet' })
+ const cosmWasmClient = useCosmWasmClient({ chainName: 'pion' })
 }
 ```
 

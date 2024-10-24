@@ -1,0 +1,32 @@
+import ParameterQuerySnippet from './parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+
+# useRemoteHosts [Hook for fetching remote hosts]
+
+## Import
+
+```ts twoslash 
+import { useRemoteHosts } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useRemoteHosts } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+ const remoteHosts = useRemoteHosts({ chainName: 'pion' })
+}
+```
+
+## Parameters
+
+### chainName
+
+`string | undefined`
+
+Name of the chain to be used to fetch the query.
+
+<ParameterQuerySnippet />
+<ParameterExtraSnippet />
