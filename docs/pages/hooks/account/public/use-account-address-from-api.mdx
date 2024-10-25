@@ -17,7 +17,7 @@ import { useAccountAddressFromApi } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const accountBaseAddressesFromApiQuery = useAccountAddressFromApi({
+  const accountAddressesFromApiQuery = useAccountAddressFromApi({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion'
   })
