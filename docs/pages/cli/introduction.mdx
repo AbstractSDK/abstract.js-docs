@@ -100,15 +100,46 @@ export default defineConfig({
 
 ### Generating for Contracts Not Registered in Schemas Repository
 
-To generate bindings for contracts that are not registered in the Abstract schemas repository, you can use the `contracts` array in the configuration. Specify the `name`, `path` to the schema, `namespace`, and `version` for each contract.
+Example:
+```ts
+contracts: [
+  {
+    name: "exampleAdapter",
+    path: "../contracts/exampleAdapter/schema/",
+    namespace: "your-namespace", 
+    version: "0.1.0",
+    moduleType: "adapter",
+  },
+],
+```
 
-### Generating for Adapter Modules
+### Generating for Contracts from the Abstract Registry
 
-When generating bindings for adapter modules, make sure to include `moduleType: "adapter"` in the contract configuration object.
+Example:
+```ts
+registry({
+  contracts: [
+    {
+      name: 'payment-app',
+      namespace: 'abstract',
+      version: '0.0.1',
+    },
+  ],
+}),
+```
+
+You can find the latest versions of these contracts in the [Abstract schemas repository](https://github.com/AbstractSDK/schemas).
 
 ### Enabling Abstract App Features
 
-If you're working with an Abstract app, you can use the `vanilla` plugin with the `enableAbstractAppFor` option. This option takes an array of contract names for which you want to enable Abstract App features.
+If you're working with an Abstract app, use the `vanilla` plugin with the `enableAbstractAppFor` option.
+
+Example:
+```ts
+vanilla({
+  enableAbstractAppFor: ['exampleAdapter']
+}),
+```
 
 ## Generate
 Once done, you're ready to generate the code:
