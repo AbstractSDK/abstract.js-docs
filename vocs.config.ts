@@ -187,8 +187,8 @@ export default defineConfig({
       text: 'Miscellaneous',
       items: [
         {
-          text: 'Running subgraph',
-          link: '/miscellaneous/running-subgraph',
+          text: 'Running Abstract API',
+          link: '/miscellaneous/running-abstract-api',
         }
       ]
     },
