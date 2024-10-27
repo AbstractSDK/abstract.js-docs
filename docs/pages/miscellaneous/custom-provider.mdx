@@ -1,0 +1,144 @@
+# Adding Custom Providers to Abstract.js
+
+Abstract.js allows you to integrate custom providers to handle specific blockchain interactions. This guide will walk you through the process of creating and using a custom provider.
+
+## Understanding Providers
+
+In Abstract.js, a provider is an object that supplies methods for interacting with a blockchain. The provider interface is defined as follows:
+
+```typescript
+type Provider = {
+  useCosmWasmClient: (arg?: CommonProviderArgs) => CosmWasmClient | undefined;
+  useSigningCosmWasmClient: (arg?: CommonProviderArgs) => SigningCosmWasmClient | undefined;
+  useSenderAddress: (arg?: CommonProviderArgs) => string | undefined;
+};
+
+type CommonProviderArgs = {
+  chainName: string | undefined;
+};
+```
+
+## Built-in Providers
+
+Abstract.js comes with some built-in providers, such as the grazProvider. You can import and use these providers directly from the @abstract-money library.
+
+Here's an example of the grazProvider implementation:
+
+```tsx project="Graz Provider" file="graz-provider.ts" type="react"
+import { chainNameToId } from '@abstract-money/core/utils'
+import { Provider } from '@abstract-money/react'
+import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'
+
+export const grazProvider = {
+  useCosmWasmClient: (
+    parameters: Parameters<Provider['useCosmWasmClient']>[0],
+  ) =>
+    useCosmWasmClient(
+      parameters?.chainName
+        ? { chainId: chainNameToId(parameters.chainName) }
+        : undefined,
+    ).data,
+  useSigningCosmWasmClient: (
+    parameters: Parameters<Provider['useSigningCosmWasmClient']>[0],
+  ) => {
+    const client = useCosmWasmSigningClient(
+      parameters?.chainName
+        ? { chainId: chainNameToId(parameters.chainName) }
+        : undefined,
+    ).data
+    if (client === null) {
+      console.warn('No signing client found for chain', parameters?.chainName)
+      return undefined
+    }
+    return client
+  },
+  useSenderAddress: (parameters: Parameters<Provider['useSenderAddress']>[0]) =>
+    useAccount(
+      parameters?.chainName
+        ? { chainId: chainNameToId(parameters.chainName) }
+        : undefined,
+    ).data?.bech32Address,
+} satisfies Provider
+```
+
+You can use this provider directly in your Abstract.js configuration:
+
+```tsx project="Abstract.js Config with Graz" file="abstract-config-graz.ts" type="react"
+import { createConfig } from "@abstract-money/react";
+import { grazProvider } from "@abstract-money/provider-graz";
+
+const abstractConfig = createConfig({
+  provider: grazProvider,
+  apiUrl: "https://your-api-url.com",
+});
+
+export default abstractConfig;
+```
+
+## Creating a Custom Provider
+
+While Abstract.js provides built-in providers, you may need to create a custom provider for specific blockchain networks or wallet solutions. Here's an example of a custom provider for the XION network:
+
+```tsx project="Custom XION Provider" file="xion-provider.ts" type="react"
+import type { Provider } from "@abstract-money/react";
+import {
+  useAbstraxionAccount,
+  useAbstraxionSigningClient,
+} from "@burnt-labs/abstraxion";
+import { HOME_CHAIN_NAME } from "@/lib/constants";
+import { useQuery } from "@tanstack/react-query";
+import { cosmWasmClientQueryOptions } from "@/lib/cosmwasm";
+
+export const xionProvider: Provider = {
+  useSenderAddress() {
+    const { data } = useAbstraxionAccount();
+    return data?.bech32Address;
+  },
+  useSigningCosmWasmClient() {
+    const { client } = useAbstraxionSigningClient();
+    return client;
+  },
+  useCosmWasmClient(args) {
+    const chainName = args?.chainName ?? HOME_CHAIN_NAME;
+    const { data: client } = useQuery(cosmWasmClientQueryOptions(chainName));
+    return client;
+  },
+};
+```
+
+In this example, we're using hooks from the `@burnt-labs/abstraxion` library to implement the required methods for the XION network.
+
+## Using Custom Providers
+
+Once you've created your custom provider, you can use it when configuring Abstract.js in your application:
+
+```tsx project="Abstract.js Config with Custom Provider" file="abstract-config-custom.ts" type="react"
+import { createConfig } from "@abstract-money/react";
+import { xionProvider } from "./xion-provider";
+
+const abstractConfig = createConfig({
+  provider: xionProvider,
+  apiUrl: "https://your-api-url.com",
+});
+
+export default abstractConfig;
+```
+
+## Integrating with AbstractProvider
+
+To use your chosen provider in your React application, wrap your app with the `AbstractProvider` component:
+
+```tsx project="App Wrapper" file="app.tsx" type="react"
+import { AbstractProvider } from "@abstract-money/react";
+import abstractConfig from "./abstract-config-custom";
+
+function App() {
+  return (
+    <AbstractProvider config={abstractConfig} {/* ...other props */}>
+      {/* Your app components */}
+    </AbstractProvider>
+  );
+}
+
+export default App;
+```

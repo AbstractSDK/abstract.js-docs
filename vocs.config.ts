@@ -220,7 +220,11 @@ export default defineConfig({
         {
           text: 'Running Abstract API',
           link: '/miscellaneous/running-abstract-api',
-        }
+        }, 
+        {
+          text: 'Custom Provider',
+          link: '/miscellaneous/custom-provider',
+        },
       ]
     },
   ],
