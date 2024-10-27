@@ -1,0 +1,83 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+
+# useSignAndBroadcast [Hook to sign and broadcast a message]
+
+## Import
+
+```ts twoslash 
+import { useSignAndBroadcast } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSignAndBroadcast } from '@abstract-money/react'
+
+function App() {
+  const signAndBroadcast = useSignAndBroadcast({
+    args: { chainName: 'osmo' },
+  })
+
+  return (
+    <button
+      onClick={() =>
+        signAndBroadcast.mutate({
+          fee: 'auto',
+          args: {
+            messages: [
+              {
+                typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+                value: {
+                  fromAddress: 'osmo1...',
+                  toAddress: 'osmo1...',
+                  amount: [{ denom: 'uosmo', amount: '1000000' }],
+                },
+              },
+            ],
+          },
+        })
+      }
+    >
+      signAndBroadcast
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+
+### chainName
+
+`string | undefined`
+
+Name of the chain to be used to fetch the query.
+
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### args
+Arguments passed to the mutation
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### memo (optional)
+
+`string | undefined`
+
+An optional memo to attach to the transaction.
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+#### messages
+
+An array of `EncodeObject[]` to be included in the transaction. Each object contains:
+
+- `typeUrl`: The type URL of the message.
+- `value`: The value of the message

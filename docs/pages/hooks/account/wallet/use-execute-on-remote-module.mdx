@@ -1,22 +1,22 @@
 import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
 import ParameterCommonSnippet from './parameter-common-snippet.mdx'
 
-# useExecuteOnRemote [Hook to execute AccountTypes.ExecuteMsg on a remote account.]
+# useExecuteOnRemoteModule [Hook to execute messages on remote modules]
 
 ## Import
 
 ```ts twoslash 
-import { useExecuteOnRemote } from '@abstract-money/react'
+import { useExecuteOnRemoteModule } from '@abstract-money/react'
 ```
 
 ## Usage
 
 ```tsx twoslash [index.tsx]
-import { useExecuteOnRemote } from '@abstract-money/react'
+import { useExecuteOnRemoteModule } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const executeOnRemote = useExecuteOnRemote({
+  const executeOnRemoteModule = useExecuteOnRemoteModule({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion',
   })
@@ -24,7 +24,7 @@ function App() {
   return (
     <button
       onClick={() =>
-        executeOnRemote.mutate({
+        executeOnRemoteModule.mutate({
           fee: 'auto',
           funds: [
             {
@@ -33,31 +33,20 @@ function App() {
             },
           ],
           args: {
-            hostChainName: '',
-            accountMsg: {
-              execute: {
-                msgs: [
-                  {
-                    bank: {
-                      send: {
-                        amount: [
-                          {
-                            amount: '1000000',
-                            denom: 'uatom',
-                          },
-                        ],
-                        to_address: 'cosmos1...',
-                      },
-                    },
-                  },
-                ],
+            hostChainName: 'cosmoshub-4',
+            moduleId: 'counter',
+            moduleMsg: {
+              count: {
+                type: 'add',
+                value: '1',
               },
             },
           },
         })
+
       }
     >
-      execute on remote
+      execute on remote module
     </button>
   )
 }
@@ -98,9 +87,26 @@ Arguments passed to the mutation. This includes:
 
 The name of the host chain where the remote module is located.
 
+### moduleId
 
-#### accountMsg
+`string`
 
-`AccountMsg`
+The unique identifier of the module to be executed.
 
-The CosmosMsg to be executed on the remote account. 
+### moduleType (optional)
+
+`ModuleType | undefined`
+
+The type of the module. Can be one of the following:
+- 'account'
+- 'native'
+- 'adapter'
+- 'app'
+- 'standalone'
+- 'service'
+
+### moduleMsg
+
+`Record<string, unknown> | string`
+
+The message to be executed on the remote module. This can be either a JSON object (`Record<string, unknown>`) or a string representing the message.

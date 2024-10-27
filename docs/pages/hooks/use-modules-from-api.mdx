@@ -31,9 +31,21 @@ Arguments passed to the hook
 
 #### chainName
 
-`string | string[]`
+`string`
 
-Array of chains to query.
+Name of chain to query.
+
+#### filter (optional)
+
+`ModuleFilter` 
+
+An object to filter the modules. It can include the following properties:
+
+- `name`: `string` (optional) - Filter by the module's name
+- `namespace`: `string` (optional) - Filter by the module's namespace
+- `status`: `ModuleStatus` (optional) - Filter by the module's status
+- `type`: `ModuleType` (optional) - Filter by the module's type
+- `version`: `string` (optional) - Filter by the module's version
 
 <ParameterExtraSnippet />
 <ParameterQuerySnippet />

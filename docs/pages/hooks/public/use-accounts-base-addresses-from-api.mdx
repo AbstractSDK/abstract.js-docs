@@ -1,0 +1,45 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useAccountsBaseAddressesFromApi [Hook for fetching base addresses of multiple Abstract accounts]
+
+## Import
+
+```ts twoslash 
+import { useAccountsBaseAddressesFromApi } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAccountsBaseAddressesFromApi } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const accountsBaseAddresses = useAccountsBaseAddressesFromApi({
+    chainName: 'pion',
+    args: {
+      accountIds: [
+        stringToAccountId('pion-1'),
+        stringToAccountId('pion-2'),
+        stringToAccountId('pion-3'),
+      ],
+    },
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+
+### args
+
+Arguments passed to the hook
+
+#### accountIds
+`AccountId[]` Array of account IDs to fetch base addresses for.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

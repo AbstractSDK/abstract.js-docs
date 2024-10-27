@@ -23,15 +23,6 @@ export default defineConfig({
             link: '/hooks/public/use-abstract-module-version',
           },
           {
-
-            text: 'useAccountFactoryConfigFromApi',
-            link: '/hooks/public/use-account-factory-config-from-api',
-          },
-          {
-            text: 'useAccountFactoryQueryClientFromApi',
-            link: '/hooks/public/use-account-factory-query-client-from-api',
-          },
-          {
             text: 'useAccountsBaseAddressesFromApi',
             link: '/hooks/public/use-accounts-base-addresses-from-api',
           },
@@ -43,11 +34,27 @@ export default defineConfig({
             text: 'useRemoteHosts',
             link: '/hooks/public/use-remote-hosts',
           },
+          {
+            text: 'useSimulateRemoteMsg',
+            link: '/hooks/public/use-simulate-remote-msg',
+          },
+          {
+            text: 'useSmartQuery',
+            link: '/hooks/public/use-smart-query',
+          },
         ]
       },
       {
         text: 'Wallet',
-        items: [
+        items: [{
+          text: 'Utils',
+            items: [
+              {
+                text: 'useSignAndBroadcast',
+                link: '/hooks/wallet/utils/use-sign-and-broadcast',
+              },
+            ]
+          },
           {
             text: 'useCreateAccountMonarchy',
             link: '/hooks/wallet/use-create-account-monarchy',
@@ -72,16 +79,20 @@ export default defineConfig({
           {
             text: 'Public', items: [
               {
-                text: 'useAccountBaseAddressesFromApi',
-                link: '/hooks/account/public/use-account-base-addresses-from-api',
+                text: 'useAccountAddressFromApi',
+                link: '/hooks/account/public/use-account-address-from-api',
+              },
+              {
+                text: 'useAccountInstantiate2Address',
+                link: '/hooks/account/public/use-account-instantiate2-address',
               },
               {
                 text: 'useAccountSettings',
                 link: '/hooks/account/public/use-account-settings',
               },
               {
-                text: 'useModuleInstantiate2AddressFromApi',
-                link: '/hooks/account/public/use-module-instantiate2-address-from-api',
+                text: 'useModuleInstantiate2Address',
+                link: '/hooks/account/public/use-module-instantiate2-address',
               },
               {
                 text: 'useModules',
@@ -90,6 +101,14 @@ export default defineConfig({
               {
                 text: 'useRemoteAccountIds',
                 link: '/hooks/account/public/use-remote-account-ids',
+              },
+              {
+                text: 'useRemoteAccounts',
+                link: '/hooks/account/public/use-remote-accounts',
+              },
+              {
+                text: 'useSimulateExecuteRemoteAccount',
+                link: '/hooks/account/public/use-simulate-execute-remote-account',
               },
               {
                 text: 'useSubAccountIdsFromApi',
@@ -112,6 +131,14 @@ export default defineConfig({
                 link: '/hooks/account/wallet/use-deposit',
               },
               {
+                text: 'useEnableIbc',
+                link: '/hooks/account/wallet/use-enable-ibc',
+              },
+              {
+                text: 'useExecuteOnRemoteModule',
+                link: '/hooks/account/wallet/use-execute-on-remote-module',
+              },
+              {
                 text: 'useExecuteOnRemote',
                 link: '/hooks/account/wallet/use-execute-on-remote',
               },
@@ -126,6 +153,10 @@ export default defineConfig({
               {
                 text: 'useSendFundsToRemote',
                 link: '/hooks/account/wallet/use-send-funds-to-remote',
+              },
+              {
+                text: 'useUpdateInfo',
+                link: '/hooks/account/wallet/use-update-info',
               },
               {
                 text: 'useUpdateSettings',

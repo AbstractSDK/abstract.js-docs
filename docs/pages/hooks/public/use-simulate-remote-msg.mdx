@@ -1,0 +1,68 @@
+import ParameterMutationSnippet from '../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useSimulateRemoteMsg [Hook to simulate a remote message]
+
+## Import
+
+```ts twoslash 
+import { useSimulateRemoteMsg } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSimulateRemoteMsg } from '@abstract-money/react'
+
+function App() {
+  const simulateRemoteMsg = useSimulateRemoteMsg({ chainName: 'osmo' })
+
+  return (
+    <button
+      onClick={() =>
+        simulateRemoteMsg.mutate({
+          hostChainName: 'osmo',
+          msgs: [
+            {
+              bank: {
+                send: {
+                  to_address: 'osmo1...',
+                  amount: [
+                    {
+                      denom: 'uosmo',
+                      amount: '1000000',
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        })
+      }
+    >
+      simulateRemoteMsg
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### args
+Arguments passed to the mutation
+
+#### hostChainName
+`string`
+
+Host chain name to simulate execution on a remote account.
+
+#### accountMsg
+`AccountMsg`
+
+The CosmosMsg to be executed on the remote account. 
+
+

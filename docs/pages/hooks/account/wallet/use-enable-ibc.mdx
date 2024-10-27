@@ -1,0 +1,61 @@
+import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useEnableIbc [Hook to enable IBC on the account.]
+
+## Import
+
+```ts twoslash 
+import { useEnableIbc } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useEnableIbc } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+
+function App() {
+  const enableIbc = useEnableIbc({
+    accountId: stringToAccountId('pion-1'),
+    chainName: 'pion',
+  })
+
+  return (
+    <button
+      onClick={() =>
+        enableIbc.mutate({
+          fee: 'auto',
+          args: {
+            ibcEnabled: true,
+          },
+        })
+      }
+    >
+      enable IBC
+    </button>
+  )
+}
+```
+
+## Hook Parameters
+<ParameterCommonSnippet/>
+<ParameterMutationSnippet />
+
+## Mutation Parameters
+
+### fee
+
+`number | StdFee | "auto"`
+
+The fee to be paid for the transaction. Can be a number, a `StdFee` object, or "auto" for automatic fee calculation.
+
+### args
+
+Arguments passed to the mutation. This includes:
+
+### enableIbc
+
+`boolean`
+
+Whether to enable IBC on the account.

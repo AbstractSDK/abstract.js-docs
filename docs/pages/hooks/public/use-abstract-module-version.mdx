@@ -1,0 +1,47 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useAbstractModuleVersion [Hook for fetching Abstract module version]
+
+## Import
+
+```ts twoslash 
+import { useAbstractModuleVersion } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useAbstractModuleVersion } from '@abstract-money/react'
+
+function App() {
+  const abstractModuleVersion = useAbstractModuleVersion({
+    chainName: 'osmosis',
+    args: {
+      moduleName: 'abstract',
+    },
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+
+### args
+
+Arguments passed to the query.
+
+#### moduleName
+`string`
+
+Name of the module to query the version for.
+
+#### version
+`string | undefined`
+
+Optional. Specific version to query for. If not provided, the latest version will be returned.
+
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

@@ -1,0 +1,26 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useCosmWasmClient [Hook for fetching a CosmWasmClient instance]
+
+## Import
+
+```ts twoslash 
+import { useCosmWasmClient } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useCosmWasmClient } from '@abstract-money/react'
+
+function App() {
+ const cosmWasmClient = useCosmWasmClient({ chainName: 'pion' })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+<ParameterQuerySnippet />

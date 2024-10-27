@@ -1,0 +1,42 @@
+import ParameterQuerySnippet from '../parameter-query-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# useSmartQuery [Hook for fetching a smart query]
+
+## Import
+
+```ts twoslash 
+import { useSmartQuery } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { useSmartQuery } from '@abstract-money/react'
+
+function App() {
+  const smartQuery = useSmartQuery({
+    chainName: 'osmo',
+    address: 'osmo1...',
+    queryMsg: {},
+  })
+}
+```
+
+## Parameters
+
+<ParameterCommonSnippet />
+
+### address
+
+`string`
+
+The address to query.
+
+### queryMsg
+
+`Record<string, unknown>`
+
+The query message to send.
+
+<ParameterQuerySnippet />

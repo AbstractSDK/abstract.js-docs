@@ -1,21 +1,21 @@
 import ParameterQuerySnippet from './parameter-query-snippet.mdx'
 import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
 
-# useAnsTokenFromAPI [Hook for getting Token information from ANS.]
+# useAnsTokenFromApi [Hook for getting Token information from ANS.]
 
 ## Import
 
 ```ts twoslash 
-import { useAnsTokenFromAPI } from '@abstract-money/react'
+import { useAnsTokenFromApi } from '@abstract-money/react'
 ```
 
 ## Usage
 
 ```tsx twoslash [index.tsx]
-import { useAnsTokenFromAPI } from '@abstract-money/react'
+import { useAnsTokenFromApi } from '@abstract-money/react'
 
 function App() {
-  const ansTokenFromAPIQuery = useAnsTokenFromAPI({
+  const ansTokenFromAPIQuery = useAnsTokenFromApi({
     args: {
       id: '...',
       chainName: 'pion'
@@ -32,9 +32,9 @@ Arguments passed to the hook
 
 #### chainName
 
-`string | string[]`
+`string`
 
-Array of chains to query.
+Name of the chain to query.
 
 #### id
 
