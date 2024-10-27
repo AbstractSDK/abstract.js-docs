@@ -13,14 +13,14 @@ A provider in Abstract.js is responsible for three main functions:
 The provider interface is defined as:
 
 ```typescript
-type Provider = {
-  useCosmWasmClient: (arg?: CommonProviderArgs) => CosmWasmClient | undefined;
-  useSigningCosmWasmClient: (arg?: CommonProviderArgs) => SigningCosmWasmClient | undefined;
-  useSenderAddress: (arg?: CommonProviderArgs) => string | undefined;
+type CommonProviderArgs = {
+    chainName: string | undefined;
 };
 
-type CommonProviderArgs = {
-  chainName: string | undefined;
+type Provider = {
+    useCosmWasmClient: (arg?: CommonProviderArgs) => CosmWasmClient | undefined;
+    useSigningCosmWasmClient: (arg?: CommonProviderArgs) => SigningCosmWasmClient | undefined;
+    useSenderAddress: (arg?: CommonProviderArgs) => string | undefined;
 };
 ```
 
@@ -88,27 +88,29 @@ For specific blockchain networks or wallet solutions, you may need to create a c
 ```tsx project="Custom XION Provider" file="xion-provider.ts" type="react"
 import type { Provider } from "@abstract-money/react";
 import {
-  useAbstraxionAccount,
-  useAbstraxionSigningClient,
+	useAbstraxionAccount,
+	useAbstraxionSigningClient,
 } from "@burnt-labs/abstraxion";
 import { HOME_CHAIN_NAME } from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
 import { cosmWasmClientQueryOptions } from "@/lib/cosmwasm";
 
 export const xionProvider: Provider = {
-  useSenderAddress() {
-    const { data } = useAbstraxionAccount();
-    return data?.bech32Address;
-  },
-  useSigningCosmWasmClient() {
-    const { client } = useAbstraxionSigningClient();
-    return client;
-  },
-  useCosmWasmClient(args) {
-    const chainName = args?.chainName ?? HOME_CHAIN_NAME;
-    const { data: client } = useQuery(cosmWasmClientQueryOptions(chainName));
-    return client;
-  },
+	useSenderAddress() {
+		const { data } = useAbstraxionAccount();
+		return data?.bech32Address;
+	},
+	useSigningCosmWasmClient() {
+		const { client } = useAbstraxionSigningClient();
+		return client;
+	},
+	useCosmWasmClient(args) {
+		const chainName = args?.chainName ?? HOME_CHAIN_NAME;
+
+		const { data: client } = useQuery(cosmWasmClientQueryOptions(chainName));
+
+		return client;
+	},
 };
 ```
 
