@@ -13,6 +13,36 @@ export default defineConfig({
       link: '/getting-started',
     },
     {
+      text: 'CLI',
+      items: [
+        {
+          text: 'Introduction',
+          link: '/cli/introduction',
+        },
+      ]
+    },
+    {
+      text: 'Core',
+      items: [
+        {
+          text: 'Introduction',
+          link: '/core/introduction',
+        },
+      ]
+    },
+    {
+      text: 'React',
+      items: [
+        {
+          text: 'Provider Examples',
+          items: [{
+            text: 'Xion',
+            link: '/react/providers/xion',
+          }],
+        },
+      ]
+    },
+    {
       text: 'Hooks',
       items: [{
         text: 'Public',
@@ -196,24 +226,7 @@ export default defineConfig({
       },
       ]
     },
-    {
-      text: 'Core',
-      items: [
-        {
-          text: 'Introduction',
-          link: '/core/introduction',
-        },
-      ]
-    },
-    {
-      text: 'CLI',
-      items: [
-        {
-          text: 'Introduction',
-          link: '/cli/introduction',
-        },
-      ]
-    },
+
     {
       text: 'Miscellaneous',
       items: [

@@ -52,7 +52,6 @@ bun add @abstract-money/react @abstract-money/provider-graz
 
 :::
 
-:::
 Using [XION abstraxion](https://www.npmjs.com/package/@burnt-labs/abstraxion):
 
 :::code-group
@@ -76,6 +75,8 @@ bun add @abstract-money/react @abstract-money/provider-xion
 :::
 
 ## Quick Start
+
+::::steps
 
 ### 1. Set up your Config & Client Provider
 Firstly, set up your config with a desired provider.
@@ -154,7 +155,7 @@ Check out the [TanStack Query docs](https://tanstack.com/query/v4/docs/framework
 
 Install `@tanstack/react-query@^4`.
 :::warning
-Since SDK relies on [ts-codegen](https://github.com/CosmWasm/ts-codegen), it is required to install only the 4th major version of TanStack React Query,
+Since the CLI relies on [ts-codegen](https://github.com/CosmWasm/ts-codegen), it is required to install only the 4th major version of TanStack React Query,
 as other versions are not supported yet.
 :::
 
@@ -211,7 +212,7 @@ export function App() {
 }
 ```
 
-### 4. Use Abstract SDK
+### 4. Use Abstract JS hooks
 Now that everything is set up, every component inside the Abstract and TanStack Query Providers can use Abstract React Hooks.
 
 ```tsx twoslash
@@ -223,7 +224,7 @@ const owner = `...`
 export default function Page() {
   const accountsQuery = useAccounts({ // [!code focus]
     args: { // [!code focus]
-      chainName: 'osmosis', // [!code focus]
+      chains: ['osmosis'], // [!code focus]
       owner, // [!code focus]
     } // [!code focus]
   }) // [!code focus]
@@ -235,3 +236,4 @@ export default function Page() {
   )
 }
 ```
+::::
