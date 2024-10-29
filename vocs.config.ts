@@ -36,6 +36,9 @@ export default defineConfig({
         {
           text: 'Provider Examples',
           items: [{
+            text: 'Graz',
+            link: '/react/providers/graz',
+          }, {
             text: 'Xion',
             link: '/react/providers/xion',
           }],
