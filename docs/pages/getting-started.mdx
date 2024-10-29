@@ -52,6 +52,29 @@ bun add @abstract-money/react @abstract-money/provider-graz
 
 :::
 
+:::
+Using [XION abstraxion](https://www.npmjs.com/package/@burnt-labs/abstraxion):
+
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [yarn]
+yarn add @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [bun]
+bun add @abstract-money/react @abstract-money/provider-xion
+```
+
+:::
+
 ## Quick Start
 
 ### 1. Set up your Config & Client Provider
@@ -61,6 +84,7 @@ import { createConfig } from '@abstract-money/react' // [!code focus]
 import { grazProvider } from '@abstract-money/provider-graz' // [!code focus]
 
 const config = createConfig({ // [!code focus]
+  apiUrl: 'https://api.abstract.money/graphql', // [!code focus]
   provider: grazProvider // [!code focus]
 }) // [!code focus]
 ```
@@ -72,6 +96,7 @@ import { createConfig, AbstractProvider } from '@abstract-money/react' // [!code
 import { grazProvider } from '@abstract-money/provider-graz'
 
 const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
   provider: grazProvider
 })
 
@@ -96,6 +121,7 @@ import { createConfig, AbstractProvider } from '@abstract-money/react'
 import { grazProvider } from '@abstract-money/provider-graz'
 
 const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
   provider: grazProvider
 })
 
@@ -160,6 +186,7 @@ import { createConfig, AbstractProvider } from '@abstract-money/react'
 import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
 
 const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
   provider: cosmosKitProvider
 })
 
