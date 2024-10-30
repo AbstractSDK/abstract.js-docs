@@ -1,0 +1,101 @@
+# Adding Custom Providers to Abstract.js
+
+Abstract.js enables integration of custom providers for Cosmos-based blockchain interactions. These providers act as an abstraction layer, facilitating operations like querying data, sending transactions, and managing wallet connections.
+
+## Understanding Providers
+
+A provider in Abstract.js is responsible for three main functions:
+
+1. Providing a CosmWasmClient for read-only operations
+2. Providing a SigningCosmWasmClient for transactions requiring signing
+3. Providing the sender's address
+
+The provider interface is defined as:
+
+```typescript
+type CommonProviderArgs = {
+    chainName: string | undefined;
+};
+
+type Provider = {
+    useCosmWasmClient: (arg?: CommonProviderArgs) => CosmWasmClient | undefined;
+    useSigningCosmWasmClient: (arg?: CommonProviderArgs) => SigningCosmWasmClient | undefined;
+    useSenderAddress: (arg?: CommonProviderArgs) => string | undefined;
+};
+```
+
+This flexibility allows you to use preferred wallet solutions or create specialized providers for specific blockchain networks.
+
+## Creating a Custom Provider
+
+For specific blockchain networks or wallet solutions, you may need to create a custom provider. Here's an example for the XION network:
+
+```tsx project="Custom XION Provider" file="xion-provider.ts" type="react"
+import type { Provider } from "@abstract-money/react";
+import {
+	useAbstraxionAccount,
+	useAbstraxionSigningClient,
+} from "@burnt-labs/abstraxion";
+import { HOME_CHAIN_NAME } from "@/lib/constants";
+import { useQuery } from "@tanstack/react-query";
+import { cosmWasmClientQueryOptions } from "@/lib/cosmwasm";
+
+export const xionProvider: Provider = {
+	useSenderAddress() {
+		const { data } = useAbstraxionAccount();
+		return data?.bech32Address;
+	},
+	useSigningCosmWasmClient() {
+		const { client } = useAbstraxionSigningClient();
+		return client;
+	},
+	useCosmWasmClient(args) {
+		const chainName = args?.chainName ?? HOME_CHAIN_NAME;
+
+		const { data: client } = useQuery(cosmWasmClientQueryOptions(chainName));
+
+		return client;
+	},
+};
+```
+
+## Using Providers
+
+To use a provider in your Abstract.js configuration:
+
+```tsx project="Abstract.js Config" file="abstract-config.ts" type="react"
+import { createConfig } from "@abstract-money/react";
+import { xionProvider } from "./xion-provider";
+// or import { grazProvider } from "@abstract-money/provider-graz";
+
+const abstractConfig = createConfig({
+  provider: xionProvider, // or grazProvider
+  apiUrl: "https://xion.api.abstract.money",
+});
+
+export default abstractConfig;
+```
+
+Then, wrap your app with the `AbstractProvider` component:
+
+```tsx project="App Wrapper" file="app.tsx" type="react"
+import { AbstractProvider } from "@abstract-money/react";
+import abstractConfig from "./abstract-config";
+
+function App() {
+  return (
+    <AbstractProvider config={abstractConfig} {/* ...other props */}>
+      {/* Your app components */}
+    </AbstractProvider>
+  );
+}
+
+export default App;
+```
+
+## Built-in Providers
+
+Abstract.js comes with built-in providers, including:
+
+- [Graz Provider](https://github.com/AbstractSDK/abstract.js/blob/mainline/packages/provider-graz/src/index.ts)
+
