@@ -26,61 +26,6 @@ type Provider = {
 
 This flexibility allows you to use preferred wallet solutions or create specialized providers for specific blockchain networks.
 
-## Built-in Providers
-
-Abstract.js includes built-in providers, such as the grazProvider:
-
-```tsx project="Graz Provider" file="graz-provider.ts" type="react"
-import { chainNameToId } from '@abstract-money/core/utils'
-import { Provider } from '@abstract-money/react'
-import { useAccount, useCosmWasmClient, useCosmWasmSigningClient } from 'graz'
-
-export const grazProvider = {
-  useCosmWasmClient: (
-    parameters: Parameters<Provider['useCosmWasmClient']>[0],
-  ) =>
-    useCosmWasmClient(
-      parameters?.chainName
-        ? { chainId: chainNameToId(parameters.chainName) }
-        : undefined,
-    ).data,
-  useSigningCosmWasmClient: (
-    parameters: Parameters<Provider['useSigningCosmWasmClient']>[0],
-  ) => {
-    const client = useCosmWasmSigningClient(
-      parameters?.chainName
-        ? { chainId: chainNameToId(parameters.chainName) }
-        : undefined,
-    ).data
-    if (client === null) {
-      console.warn('No signing client found for chain', parameters?.chainName)
-      return undefined
-    }
-    return client
-  },
-  useSenderAddress: (parameters: Parameters<Provider['useSenderAddress']>[0]) =>
-    useAccount(
-      parameters?.chainName
-        ? { chainId: chainNameToId(parameters.chainName) }
-        : undefined,
-    ).data?.bech32Address,
-} satisfies Provider
-```
-
-You can use this provider directly in your Abstract.js configuration:
-
-```tsx project="Abstract.js Config with Graz" file="abstract-config-graz.ts" type="react"
-import { createConfig } from "@abstract-money/react";
-import { grazProvider } from "@abstract-money/provider-graz";
-
-const abstractConfig = createConfig({
-  provider: grazProvider,
-  apiUrl: "https://your-api-url.com",
-});
-
-export default abstractConfig;
-```
-
 ## Creating a Custom Provider
 
 For specific blockchain networks or wallet solutions, you may need to create a custom provider. Here's an example for the XION network:
@@ -147,4 +92,10 @@ function App() {
 
 export default App;
 ```
+
+## Built-in Providers
+
+Abstract.js comes with built-in providers, including:
+
+- [Graz Provider](https://github.com/AbstractSDK/abstract.js/blob/mainline/packages/provider-graz/src/index.ts)
 
