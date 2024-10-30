@@ -52,26 +52,52 @@ bun add @abstract-money/react @abstract-money/provider-graz
 
 :::
 
+Using [XION abstraxion](https://www.npmjs.com/package/@burnt-labs/abstraxion):
+
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [yarn]
+yarn add @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/react @abstract-money/provider-xion
+```
+
+```bash [bun]
+bun add @abstract-money/react @abstract-money/provider-xion
+```
+
+:::
+
 ## Quick Start
 
-### 1. Set up your Config & Client Provider
-Firstly, set up your config with a desired provider.
+::::steps
+
+### 1. Set up your Abstract Config & Client Provider
+Firstly, set up your Abstract config with a desired provider.
 ```ts twoslash
 import { createConfig } from '@abstract-money/react' // [!code focus]
 import { grazProvider } from '@abstract-money/provider-graz' // [!code focus]
 
 const config = createConfig({ // [!code focus]
+  apiUrl: 'https://api.abstract.money/graphql', // [!code focus]
   provider: grazProvider // [!code focus]
 }) // [!code focus]
 ```
 
-### 2. Provide the Config to Abstract Provider
+### 2. Provide the Abstract Config to Abstract Provider
 Wrap your app in the `AbstractProvider` React Context Provider and pass the `config` you created earlier to the `config` property.
 ```tsx twoslash
 import { createConfig, AbstractProvider } from '@abstract-money/react' // [!code focus]
 import { grazProvider } from '@abstract-money/provider-graz'
 
 const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
   provider: grazProvider
 })
 
@@ -86,49 +112,12 @@ export function App() { // [!code focus]
 
 ### 3. Setup Tanstack Query
 :::info
-If you are using `graz`, you can skip this step as [graz](https://graz.sh) already provides a `QueryClient` instance which `AbstractProvider` uses.
-
-You only need to wrap `AbstractProvider` with graz.
-```tsx twoslash
-import { GrazProvider } from 'graz' // [!code focus]
-import { mainnetChains } from 'graz/chains' // [!code focus]
-import { createConfig, AbstractProvider } from '@abstract-money/react'
-import { grazProvider } from '@abstract-money/provider-graz'
-
-const config = createConfig({
-  provider: grazProvider
-})
-
-export function App() {
-  return (
-    <GrazProvider grazOptions={{ // [!code focus]
-      chains: [mainnetChains.osmosis], // [!code focus]
-      chainsConfig: { // [!code focus]
-        [mainnetChains.osmosis.chainId]: { // [!code focus]
-          gas: { // [!code focus]
-            price: '0.25', // [!code focus]
-            denom: 'osmo', // [!code focus]
-          }, // [!code focus]
-        }, // [!code focus]
-      }, // [!code focus]
-    }}> // [!code focus]
-      <AbstractProvider config={config}>
-        {/*...*/}
-      </AbstractProvider>
-    </GrazProvider> // [!code focus]
-  )
-}
-```
+If you are using `graz`, you can skip this step as [graz](https://graz.sh) already provides a `QueryClient` instance which `AbstractProvider` uses. See the [example with graz](./react/providers/graz.mdx).
 :::
 
-Outside the `AbstractProvider`, wrap your app in a TanStack Query React Context Provider,
-e.g. QueryClientProvider, and pass a new QueryClient instance to the client property.
-
-Check out the [TanStack Query docs](https://tanstack.com/query/v4/docs/framework/react/overview) to learn about the library, APIs, and more.
-
-Install `@tanstack/react-query@^4`.
+1. Install `@tanstack/react-query@^4`.
 :::warning
-Since SDK relies on [ts-codegen](https://github.com/CosmWasm/ts-codegen), it is required to install only the 4th major version of TanStack React Query,
+Since the CLI relies on [ts-codegen](https://github.com/CosmWasm/ts-codegen), it is required to install only the 4th major version of TanStack React Query,
 as other versions are not supported yet.
 :::
 
@@ -151,7 +140,42 @@ bun add @tanstack/react-query@^4
 ```
 
 :::
-Now, wrap the `AbstractProvider` with `QueryClientProvider`.
+
+2. Next, outside the `AbstractProvider`, wrap your `AbstractProvider` with `QueryClientProvider` and pass a new `QueryClient` instance to the client property.
+
+```tsx twoslash
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // [!code focus]
+import { createConfig, AbstractProvider } from '@abstract-money/react'
+import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
+
+const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
+  provider: cosmosKitProvider
+})
+
+const client = new QueryClient() // [!code focus]
+
+export function App() {
+  return (
+    <QueryClientProvider client={client}> // [!code focus]
+      <AbstractProvider config={config}>
+        {/*...*/}
+      </AbstractProvider>
+    </QueryClientProvider> // [!code focus]
+  )
+}
+```
+
+3. Check out the [TanStack Query docs](https://tanstack.com/query/v4/docs/framework/react/overview) to learn about the library, APIs, and more.
+
+### 4. Wrap with your provider's context
+
+Next, you should wrap these contexts with your provider-specific context. For example, if you are using `cosmos-kit`, you should wrap the `AbstractProvider` with the `ChainProvider`.
+
+Other examples:
+- [Graz Provider](./react/providers/graz.mdx)
+- [XION Provider](./react/providers/xion.mdx)
+
 ```tsx twoslash
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // [!code focus]
 import { ChainProvider, defaultModalViews } from "@cosmos-kit/react";
@@ -160,6 +184,7 @@ import { createConfig, AbstractProvider } from '@abstract-money/react'
 import { cosmosKitProvider } from '@abstract-money/provider-cosmoskit'
 
 const config = createConfig({
+  apiUrl: 'https://testnet.api.abstract.money/graphql',
   provider: cosmosKitProvider
 })
 
@@ -167,24 +192,24 @@ const client = new QueryClient() // [!code focus]
 
 export function App() {
   return (
-    <ChainProvider
-      chains={["cosmoshub"]}
-      wallets={[
-        ...keplrWallets,
-        /*...*/
-      ]}
-    >
-      <QueryClientProvider client={client}> // [!code focus]
+    <ChainProvider  // [!code focus]
+      chains={["cosmoshub"]}  // [!code focus]
+      wallets={[  // [!code focus]
+        ...keplrWallets,  // [!code focus]
+        /*...*/  // [!code focus]
+      ]}  // [!code focus]
+    >  // [!code focus]
+      <QueryClientProvider client={client}>
         <AbstractProvider config={config}>
           {/*...*/}
         </AbstractProvider>
-      </QueryClientProvider> // [!code focus]
-    </ChainProvider>
+      </QueryClientProvider>
+    </ChainProvider> // [!code focus]
   )
 }
 ```
 
-### 4. Use Abstract SDK
+### 5. Use Abstract JS hooks
 Now that everything is set up, every component inside the Abstract and TanStack Query Providers can use Abstract React Hooks.
 
 ```tsx twoslash
@@ -196,7 +221,7 @@ const owner = `...`
 export default function Page() {
   const accountsQuery = useAccounts({ // [!code focus]
     args: { // [!code focus]
-      chainName: 'osmosis', // [!code focus]
+      chains: ['osmosis'], // [!code focus]
       owner, // [!code focus]
     } // [!code focus]
   }) // [!code focus]
@@ -208,3 +233,4 @@ export default function Page() {
   )
 }
 ```
+::::

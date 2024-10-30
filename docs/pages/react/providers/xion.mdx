@@ -1,0 +1,47 @@
+# XION Provider [Using the XION Provider with React]
+
+To use XION, simply wrap the `AbstractProvider` with the `AbstraxionProvider` and pass in its config object.
+
+```tsx twoslash
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AbstraxionProvider } from "@burnt-labs/abstraxion";
+import { createConfig, AbstractProvider } from '@abstract-money/react'
+import { xionProvider } from '@abstract-money/provider-xion' // [!code focus]
+
+const config = createConfig({ // [!code focus]
+  apiUrl: 'https://xion.api.abstract.money/graphql', // [!code focus]
+  provider: xionProvider // [!code focus]
+}) // [!code focus]
+
+const client = new QueryClient()
+
+const YOUR_CONTRACT_ADDRESS = 'xion1...xyz'; // [!code focus]
+
+const ABSTRAXION_CONFIG = { // [!code focus]
+  contracts: [ // [!code focus]
+    // Usually, you would have a list of different contracts here // [!code focus]
+    { // [!code focus]
+      address: YOUR_CONTRACT_ADDRESS, // [!code focus]
+      amounts: [{ denom: 'uxion', amount: "1000000" }], // [!code focus]
+    }, // [!code focus]
+  ], // [!code focus]
+  bank: [ // [!code focus]
+    { // [!code focus]
+      denom: 'uxion', // [!code focus]
+      amount: "1000000", // [!code focus]
+    }, // [!code focus]
+  ], // [!code focus]
+}; // [!code focus]
+
+export function App() {
+  return (
+    <AbstraxionProvider config={ABSTRAXION_CONFIG}> // [!code focus]
+      <QueryClientProvider client={client}>
+        <AbstractProvider config={config}>
+          {/*...*/}
+        </AbstractProvider>
+      </QueryClientProvider>
+    </AbstraxionProvider> // [!code focus]
+  )
+}
+```

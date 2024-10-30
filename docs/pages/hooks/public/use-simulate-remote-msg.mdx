@@ -5,7 +5,7 @@ import ParameterCommonSnippet from './parameter-common-snippet.mdx'
 
 ## Import
 
-```ts twoslash 
+```ts twoslash
 import { useSimulateRemoteMsg } from '@abstract-money/react'
 ```
 
@@ -21,7 +21,7 @@ function App() {
     <button
       onClick={() =>
         simulateRemoteMsg.mutate({
-          hostChainName: 'osmo',
+          hostChainName: 'osmosis',
           msgs: [
             {
               bank: {
@@ -63,6 +63,6 @@ Host chain name to simulate execution on a remote account.
 #### accountMsg
 `AccountMsg`
 
-The CosmosMsg to be executed on the remote account. 
+The CosmosMsg to be executed on the remote account.
 
 
