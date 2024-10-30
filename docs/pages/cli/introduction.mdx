@@ -7,7 +7,7 @@ If you have `tsconfig.json` in your project, it will generate TypeScript typings
 :::
 
 :::warning
-The CLI package relies hardly on [ts-codegen](https://github.com/CosmWasm/ts-codegen).
+The CLI package relies heavily on [ts-codegen](https://github.com/CosmWasm/ts-codegen).
 :::
 
 ## Installation 
@@ -40,22 +40,40 @@ abstract <command> [options]
 
 ## Init
 
-Once you have installed the CLI, you have to define CLI config at `abstract.config.ts`.
-You can generate a default one, using the command:
+Once you have installed the CLI, you need to define the CLI config in `abstract.config.ts`.
+You can generate a default configuration using the command:
 
 ```bash
 abstract init
 ```
 
-This will generate an `abstract.config.ts` in your project root. You can configure accordingly.
+This will generate an `abstract.config.ts` in your project root. You can then configure it according to your needs.
 
-```ts twoslash
+## Configuration
+
+Here's an example of how to configure `abstract.config.ts`:
+
+```ts
 import { defineConfig } from '@abstract-money/cli'
-import { react, registry } from '@abstract-money/cli/plugins'
+import { react, registry, vanilla } from '@abstract-money/cli/plugins'
 
 export default defineConfig({
   // Target directory for generated files.
   out: './src/generated',
+
+  // Define contracts for which to generate bindings
+  // Use this for contracts not registered in the Abstract schemas repository
+  contracts: [
+    {
+      name: "exampleAdapter",
+      path: "../contracts/exampleAdapter/schema/",
+      namespace: "your-namespace", 
+      version: "0.1.0",
+      moduleType: "adapter", // Specify this if it's an adapter module
+    },
+    // You can add more contracts here as needed
+  ],
+
   // List of plugins to use.
   plugins: [
     // Generate React hooks.
@@ -70,8 +88,57 @@ export default defineConfig({
         },
       ],
     }),
+
+    // Generate vanilla JavaScript bindings
+    vanilla({
+      // Enable Abstract App features for specific contracts
+      enableAbstractAppFor: ['exampleAdapter']
+    }),
   ],
 })
+```
+
+### Generating for Contracts Not Registered in Schemas Repository
+
+Example:
+```ts
+contracts: [
+  {
+    name: "exampleAdapter",
+    path: "../contracts/exampleAdapter/schema/",
+    namespace: "your-namespace", 
+    version: "0.1.0",
+    moduleType: "adapter",
+  },
+],
+```
+
+### Generating for Contracts from the Abstract Registry
+
+Example:
+```ts
+registry({
+  contracts: [
+    {
+      name: 'payment-app',
+      namespace: 'abstract',
+      version: '0.0.1',
+    },
+  ],
+}),
+```
+
+You can find the latest versions of these contracts in the [Abstract schemas repository](https://github.com/AbstractSDK/schemas).
+
+### Enabling Abstract App Features
+
+If you're working with an Abstract app, use the `vanilla` plugin with the `enableAbstractAppFor` option.
+
+Example:
+```ts
+vanilla({
+  enableAbstractAppFor: ['exampleAdapter']
+}),
 ```
 
 ## Generate
