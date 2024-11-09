@@ -5,18 +5,19 @@ import ParameterCommonSnippet from './parameter-common-snippet.mdx'
 
 ## Import
 
-```ts twoslash 
+```ts twoslash
 import { useUpgradeModules } from '@abstract-money/react'
 ```
 
 ## Usage
 
 ```tsx twoslash [index.tsx]
+// @noErrors
 import { useUpgradeModules } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const updateInfo = useUpgradeModules({
+  const upgradeModules = useUpgradeModules({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion',
   })
@@ -27,14 +28,22 @@ function App() {
         upgradeModules.mutate({
           fee: 'auto',
           args: {
+            // @ts-ignore broken ts-codegen for nested arrays
             modules: [
-              [
-                {
-                  name: 'abstract',
-                  namespace: 'abstract',
-                  version: 'latest',
-                },
+              [{
+                namespace: 'abstract',
+                name: 'etf',
+                version: 'latest',
+              },
+              "=migrateMsgBase64"
               ],
+              [{
+                namespace: 'abstract',
+                name: 'dex',
+                version: 'latest',
+              },
+              null
+              ]
             ],
           },
         })

@@ -3,6 +3,9 @@ import { defineConfig } from 'vocs'
 export default defineConfig({
   title: 'Docs',
   logoUrl: {dark: '/logo-dark.svg', light: '/logo-light.svg'},
+  titleTemplate: '%s · Abstract.js',
+  description:
+    'Build reliable Abstract apps with lightweight, composable, & type-safe modules from Abstract.js.',
   socials: [
     {
       icon: 'github',
@@ -223,11 +226,15 @@ export default defineConfig({
                   link: '/hooks/account/wallet/use-update-settings',
                 },
                 {
-                  text: 'useUpgradeModule',
-                  link: '/hooks/account/wallet/use-upgrade-module',
+                  text: 'useUpgradeModules',
+                  link: '/hooks/account/wallet/use-upgrade-modules',
                 },
                 {
                   text: 'useWithdraw',
+                  link: '/hooks/account/wallet/use-withdraw',
+                },
+                {
+                  text: 'useSendFunds',
                   link: '/hooks/account/wallet/use-withdraw',
                 },
               ],

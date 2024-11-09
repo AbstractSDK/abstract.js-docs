@@ -16,12 +16,12 @@
     "vocs": "^1.0.0-alpha.62"
   },
   "devDependencies": {
-    "@abstract-money/cli": "^0.3.5",
-    "@abstract-money/core": "^1.1.6",
+    "@abstract-money/cli": "^1.2.0",
+    "@abstract-money/core": "^3.3.0",
     "@abstract-money/provider-cosmoskit": "^2.0.11",
     "@abstract-money/provider-graz": "^2.0.11",
-    "@abstract-money/provider-xion": "^1.0.0",
-    "@abstract-money/react": "^2.0.0",
+    "@abstract-money/provider-xion": "^3.0.0",
+    "@abstract-money/react": "^2.3.0",
     "@burnt-labs/abstraxion": "=1.0.0-alpha.50",
     "@cosmos-kit/keplr": "^2.7.2",
     "@cosmos-kit/react": "^2.11.2",
