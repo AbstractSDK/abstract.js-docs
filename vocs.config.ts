@@ -74,6 +74,7 @@ export default defineConfig({
     },
     {
       text: 'Hooks',
+      collapsed: true,
       items: [
         {
           text: 'Public',
