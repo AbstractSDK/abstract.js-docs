@@ -1,0 +1,3 @@
+import{u as i,j as n}from"./index-3aSGjU1j.js";const s=void 0;function o(e){const t={a:"a",code:"code",div:"div",h3:"h3",p:"p",...i(),...e.components};return n.jsxs(n.Fragment,{children:[n.jsxs(t.h3,{id:"mutation",children:["mutation",n.jsx(t.a,{"aria-hidden":"true",tabIndex:"-1",href:"#mutation",children:n.jsx(t.div,{"data-autolink-icon":!0})})]}),`
+`,n.jsx(t.p,{children:n.jsx(t.code,{children:"MutationOptions | undefined"})}),`
+`,n.jsxs(t.p,{children:[n.jsx(t.a,{href:"https://tanstack.com/query/v4/docs/framework/react/reference/useMutation",children:n.jsx(t.code,{children:"MutationOptions"})})," to use."]})]})}function a(e={}){const{wrapper:t}={...i(),...e.components};return t?n.jsx(t,{...e,children:n.jsx(o,{...e})}):o(e)}export{a as default,s as frontmatter};

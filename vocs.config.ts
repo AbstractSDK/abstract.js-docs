@@ -84,8 +84,8 @@ export default defineConfig({
               link: '/hooks/public/use-abstract-module-version',
             },
             {
-              text: 'useAccountsBaseAddressesFromApi',
-              link: '/hooks/public/use-accounts-base-addresses-from-api',
+              text: 'useAccountsAddressesFromApi',
+              link: '/hooks/public/use-accounts-addresses-from-api',
             },
             {
               text: 'useCosmWasmClient',
