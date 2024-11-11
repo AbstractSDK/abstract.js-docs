@@ -1,0 +1,41 @@
+import ParameterQuerySnippet from '../../parameter-query-snippet.mdx'
+import ParameterExtraSnippet from './parameter-extra-snippet.mdx'
+import ParameterCommonSnippet from './parameter-common-snippet.mdx'
+
+# usePredictAccountAddress [Hook for fetching the expected address for an Abstract account using Instantiate2]
+
+## Import
+
+```ts twoslash
+import { usePredictAccountAddress } from '@abstract-money/react'
+```
+
+## Usage
+
+```tsx twoslash [index.tsx]
+import { usePredictAccountAddress } from '@abstract-money/react'
+import { stringToAccountId } from '@abstract-money/core'
+import { useAccount } from 'graz'
+
+function App() {
+
+  const { data } = useAccount();
+  const predictedAccountAddress = usePredictAccountAddress({
+    chainName: 'neutrontestnet',
+    args: {
+      creator: data?.bech32Address || '',
+      salt: {
+        accountId: stringToAccountId('neutrontestnet-350')
+      },
+    },
+    query: {
+      enabled: !!data?.bech32Address,
+    }
+  })
+}
+```
+
+## Parameters
+<ParameterCommonSnippet/>
+<ParameterExtraSnippet />
+<ParameterQuerySnippet />

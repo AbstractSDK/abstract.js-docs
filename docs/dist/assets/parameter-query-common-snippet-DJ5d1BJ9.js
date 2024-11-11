@@ -1,0 +1,3 @@
+import{u as i,j as n}from"./index-JfyUgcML.js";const c=void 0;function a(t){const e={a:"a",code:"code",div:"div",h3:"h3",p:"p",...i(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsxs(e.h3,{id:"chainname",children:["chainName",n.jsx(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#chainname",children:n.jsx(e.div,{"data-autolink-icon":!0})})]}),`
+`,n.jsx(e.p,{children:n.jsx(e.code,{children:"string | undefined"})}),`
+`,n.jsx(e.p,{children:"Name of the chain to be used to fetch the query."})]})}function d(t={}){const{wrapper:e}={...i(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(a,{...t})}):a(t)}export{d as default,c as frontmatter};

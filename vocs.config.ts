@@ -146,16 +146,16 @@ export default defineConfig({
                   link: '/hooks/account/public/use-account-address-from-api',
                 },
                 {
-                  text: 'useAccountInstantiate2Address',
-                  link: '/hooks/account/public/use-account-instantiate2-address',
+                  text: 'usePredictAccountAddress',
+                  link: '/hooks/account/public/use-predict-account-address',
                 },
                 {
                   text: 'useAccountSettings',
                   link: '/hooks/account/public/use-account-settings',
                 },
                 {
-                  text: 'useModuleInstantiate2Address',
-                  link: '/hooks/account/public/use-module-instantiate2-address',
+                  text: 'usePredictModuleAddress',
+                  link: '/hooks/account/public/use-predict-module-address',
                 },
                 {
                   text: 'useModules',
