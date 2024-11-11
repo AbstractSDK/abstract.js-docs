@@ -1,3 +1,0 @@
-import{u as d,j as e}from"./index-CD6P7Mgz.js";const a=void 0;function r(t){const n={a:"a",code:"code",div:"div",h3:"h3",p:"p",...d(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsxs(n.h3,{id:"extra",children:["extra",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#extra",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
-`,e.jsx(n.p,{children:e.jsx(n.code,{children:"{ apiUrl?: string | undefined; } | undefined"})}),`
-`,e.jsx(n.p,{children:"Extra options to override decorated parameters."})]})}function i(t={}){const{wrapper:n}={...d(),...t.components};return n?e.jsx(n,{...t,children:e.jsx(r,{...t})}):r(t)}export{i as default,a as frontmatter};

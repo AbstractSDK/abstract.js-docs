@@ -1,0 +1,3 @@
+import{u as s,j as e}from"./index-JfyUgcML.js";const c=void 0;function r(t){const n={a:"a",code:"code",div:"div",h3:"h3",p:"p",...s(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsxs(n.h3,{id:"query",children:["query",e.jsx(n.a,{"aria-hidden":"true",tabIndex:"-1",href:"#query",children:e.jsx(n.div,{"data-autolink-icon":!0})})]}),`
+`,e.jsx(n.p,{children:e.jsx(n.code,{children:"QueryOptions | undefined"})}),`
+`,e.jsxs(n.p,{children:[e.jsx(n.a,{href:"https://tanstack.com/query/v4/docs/framework/react/reference/useQuery",children:e.jsx(n.code,{children:"QueryOptions"})})," to use."]})]})}function d(t={}){const{wrapper:n}={...s(),...t.components};return n?e.jsx(n,{...t,children:e.jsx(r,{...t})}):r(t)}export{d as default,c as frontmatter};

@@ -1,22 +1,22 @@
 import ParameterMutationSnippet from '../../parameter-mutation-snippet.mdx'
 import ParameterCommonSnippet from './parameter-common-snippet.mdx'
 
-# useWithdraw [Hook to withdraw assets from an Account.]
+# useSendFunds [Hook to send or withdraw assets from an Account.]
 
 ## Import
 
-```ts twoslash 
-import { useWithdraw } from '@abstract-money/react'
+```ts twoslash
+import { useSendFunds } from '@abstract-money/react'
 ```
 
 ## Usage
 
 ```tsx twoslash [index.tsx]
-import { useWithdraw } from '@abstract-money/react'
+import { useSendFunds } from '@abstract-money/react'
 import { stringToAccountId } from '@abstract-money/core'
 
 function App() {
-  const withdraw = useWithdraw({
+  const sendFunds = useSendFunds({
     accountId: stringToAccountId('pion-1'),
     chainName: 'pion',
   })
@@ -24,7 +24,7 @@ function App() {
   return (
     <button
       onClick={() =>
-        withdraw.mutate({
+        sendFunds.mutate({
           fee: 'auto',
           args: {
             assets: [
