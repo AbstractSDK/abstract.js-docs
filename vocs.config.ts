@@ -73,6 +73,20 @@ export default defineConfig({
       ],
     },
     {
+      text: 'Actions',
+      items: [
+        {
+          text: 'Actions Examples',
+          items: [
+            {
+              text: 'Xion',
+              link: '/react/actions/xion',
+            },
+          ],
+        },
+      ],
+    },
+    {
       text: 'Hooks',
       collapsed: true,
       items: [

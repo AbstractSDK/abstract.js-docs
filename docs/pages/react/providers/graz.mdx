@@ -1,8 +1,10 @@
 # Graz Provider
 
-With [graz](https://graz.sh), you only need to wrap `AbstractProvider` with its provider as it already uses react-query under the hood.
+Since [graz](https://graz.sh) relies on react-query, you will need to wrap the `GrazProvider` and `AbstractProvider` with the react-query context provider.
 
 ```tsx twoslash
+// @noErrors
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query' // [!code focus]
 import { GrazProvider } from 'graz' // [!code focus]
 import { mainnetChains } from 'graz/chains' // [!code focus]
 import { createConfig, AbstractProvider } from '@abstract-money/react'
@@ -13,23 +15,30 @@ const config = createConfig({
   provider: grazProvider
 })
 
+const client = new QueryClient() // [!code focus]
+
 export function App() {
   return (
-    <GrazProvider grazOptions={{ // [!code focus]
-      chains: [mainnetChains.osmosis], // [!code focus]
-      chainsConfig: { // [!code focus]
-        [mainnetChains.osmosis.chainId]: { // [!code focus]
-          gas: { // [!code focus]
-            price: '0.25', // [!code focus]
-            denom: 'uosmo', // [!code focus]
+    <QueryClientProvider client={client}> // [!code focus]
+      <GrazProvider // [!code focus]
+        client={client} // [!code focus]
+        grazOptions={{ // [!code focus]
+          chains: [mainnetChains.osmosis], // [!code focus]
+          chainsConfig: { // [!code focus]
+            [mainnetChains.osmosis.chainId]: { // [!code focus]
+              gas: { // [!code focus]
+                price: '0.25', // [!code focus]
+                denom: 'uosmo', // [!code focus]
+              }, // [!code focus]
+            }, // [!code focus]
           }, // [!code focus]
-        }, // [!code focus]
-      }, // [!code focus]
-    }}> // [!code focus]
-      <AbstractProvider config={config}>
-        {/*...*/}
-      </AbstractProvider>
-    </GrazProvider> // [!code focus]
+        }}
+      > // [!code focus]
+        <AbstractProvider config={config}>
+          {/*...*/}
+        </AbstractProvider>
+      </GrazProvider> // [!code focus]
+  </QueryClientProvider> // [!code focus]
   )
 }
 ```
