@@ -55,6 +55,19 @@ export default defineConfig({
       ],
     },
     {
+      text: 'Actions',
+      items: [
+        {
+          text: 'Introduction',
+          link: '/core/actions'
+        },
+        {
+          text: 'Xion',
+          link: '/core/actions/xion'
+        }
+      ]
+    },
+    {
       text: 'React',
       items: [
         {
@@ -73,21 +86,7 @@ export default defineConfig({
       ],
     },
     {
-      text: 'Actions',
-      items: [
-        {
-          text: 'Actions Examples',
-          items: [
-            {
-              text: 'Xion',
-              link: '/react/actions/xion',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      text: 'Hooks',
+      text: 'React Hooks',
       collapsed: true,
       items: [
         {
