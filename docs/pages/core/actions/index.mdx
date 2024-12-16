@@ -1,0 +1,25 @@
+# Abstract.js Actions
+
+Abstract.js is built to a modular standard similar to [viem](https://viem.sh) and allows for extending any client with additional actions.
+
+## Extending the clients
+
+You can extend the client with additional actions by using the `extend` method. This method allows you to add additional actions to the client.
+
+```tsx twoslash
+import { createApiClient } from '@abstract-money/core'
+
+const apiClient = createApiClient({ apiUrl: 'https://api.abstract.money' })
+
+const extendedClient = apiClient.extend(() => { // [!code focus]
+  return { // [!code focus]
+    getData: async () => Promise.resolve('data') // [!code focus]
+  } // [!code focus]
+}) // [!code focus]
+```
+
+You can create your own actions package, such as the `@abstract-money/actions-xion` package for custom functionality.
+
+## Examples
+
+- [XION](xion)

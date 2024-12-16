@@ -10,7 +10,7 @@ If you have `tsconfig.json` in your project, it will generate TypeScript typings
 The CLI package relies heavily on [ts-codegen](https://github.com/CosmWasm/ts-codegen).
 :::
 
-## Installation 
+## Installation
 
 :::code-group
 
@@ -66,8 +66,8 @@ export default defineConfig({
   contracts: [
     {
       name: "exampleAdapter",
-      path: "../contracts/exampleAdapter/schema/",
-      namespace: "your-namespace", 
+      path: "../schema/your-namespace/exampleAdapter/0.1.0/schema/",
+      namespace: "your-namespace",
       version: "0.1.0",
       moduleType: "adapter", // Specify this if it's an adapter module
     },
@@ -89,7 +89,7 @@ export default defineConfig({
       ],
     }),
 
-    // Generate vanilla JavaScript bindings
+    // Generate vanilla JavaScript bindings. Only include this if not using `react`.
     vanilla({
       // Enable Abstract App features for specific contracts
       enableAbstractAppFor: ['exampleAdapter']
@@ -106,7 +106,7 @@ contracts: [
   {
     name: "exampleAdapter",
     path: "../contracts/exampleAdapter/schema/",
-    namespace: "your-namespace", 
+    namespace: "your-namespace",
     version: "0.1.0",
     moduleType: "adapter",
   },
@@ -161,3 +161,15 @@ You should get an output like:
 ```
 
 And you should be all set to use the types generated directly into your codebase.
+
+# Errors
+
+## Token 'X' does not exist
+
+This is an issue with ts-codegen resolving too many files in the schema folder. You can fix this by removing all the files from the schema folder except for `module-schema.json`.
+
+In our templates folder, we have an example of moving only the `module-schema.json` files to a schema folder [here](https://github.com/AbstractSDK/templates/blob/c303a61fa782c4dfc5456eb3050c0e0ce3a36deb/scripts/schema.sh).
+
+## Double imports
+
+There is currently a clash between the `react` and `vanilla` plugins that includes imports for contracts generated using each. If you encounter this, please [reach out](http://discord.gg/uch3Tq3aym).

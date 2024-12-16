@@ -10,28 +10,7 @@ You can learn more about the rationale behind the project in the [Why abstract.j
 
 ## Installation
 
-Using [CosmosKit](https://cosmoskit.com):
-:::code-group
-
-```bash [npm]
-npm i @abstract-money/react @abstract-money/provider-cosmoskit
-```
-
-```bash [yarn]
-yarn add @abstract-money/react @abstract-money/provider-cosmoskit
-```
-
-```bash [pnpm]
-pnpm add @abstract-money/react @abstract-money/provider-cosmoskit
-```
-
-```bash [bun]
-bun add @abstract-money/react @abstract-money/provider-cosmoskit
-```
-
-:::
 Using [graz](https://graz.sh):
-
 :::code-group
 
 ```bash [npm]
@@ -51,8 +30,29 @@ bun add @abstract-money/react @abstract-money/provider-graz
 ```
 
 :::
+Using [CosmosKit](https://cosmoskit.com):
 
-Using [XION abstraxion](https://www.npmjs.com/package/@burnt-labs/abstraxion):
+:::code-group
+
+```bash [npm]
+npm i @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [yarn]
+yarn add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [pnpm]
+pnpm add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+```bash [bun]
+bun add @abstract-money/react @abstract-money/provider-cosmoskit
+```
+
+:::
+
+Using [XION Abstraxion](https://www.npmjs.com/package/@burnt-labs/abstraxion):
 
 :::code-group
 
@@ -111,9 +111,6 @@ export function App() { // [!code focus]
 ```
 
 ### 3. Setup Tanstack Query
-:::info
-If you are using `graz`, you can skip this step as [graz](https://graz.sh) already provides a `QueryClient` instance which `AbstractProvider` uses. See the [example with graz](./react/providers/graz.mdx).
-:::
 
 1. Install `@tanstack/react-query@^4`.
 :::warning
@@ -193,7 +190,7 @@ const client = new QueryClient() // [!code focus]
 export function App() {
   return (
     <ChainProvider  // [!code focus]
-      chains={["cosmoshub"]}  // [!code focus]
+      chains={["neutron"]}  // [!code focus]
       wallets={[  // [!code focus]
         ...keplrWallets,  // [!code focus]
         /*...*/  // [!code focus]
@@ -221,7 +218,7 @@ const owner = `...`
 export default function Page() {
   const accountsQuery = useAccounts({ // [!code focus]
     args: { // [!code focus]
-      chains: ['osmosis'], // [!code focus]
+      chains: ['neutron'], // [!code focus]
       owner, // [!code focus]
     } // [!code focus]
   }) // [!code focus]
